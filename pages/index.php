@@ -203,6 +203,7 @@
                             <!-- /.row -->
                         </div>
                         <!-- /.panel-body -->
+
                     </div>
 
                     <!-- /.panel -->
@@ -240,6 +241,36 @@
                             <div id="gender-graph"></div>
                         </div>
                         <!-- /.panel-body -->
+                    </div>
+                    </div>
+
+                    <!-- /.panel -->
+                    <div class="col-lg-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <i class="fa fa-bell"></i> Best Seller for <?php echo date("M");?>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+<?php
+        $m=date('m');
+        $y=date('Y');
+        $query=mysqli_query($con,"select *,SUM(stockout_qty) as qty from stockout natural join product where YEAR(stockout_date)='$y' and MONTH(stockout_date)='$m' order by qty asc LIMIT 0,10")or die(mysqli_error($con));
+          while($row=mysqli_fetch_array($query))
+                {
+?>                                                         
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-thumb-tack fa-fw"></i> <?php echo $row['prod_name'];?>
+                                    <span class="pull-right small badge badge-green">
+                                    <em><?php echo $row['qty'];?></em>
+                                    </span>
+                                </a>
+<?php }?>                                 
+                            </div>
+                            <!-- /.list-group -->
+                        </div>
+                       
                     </div>
                     </div>
 

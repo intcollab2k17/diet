@@ -114,6 +114,12 @@
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
+                                <li>
+                                    <a href="inventory.php">Inventory</a>
+                                </li>
+                                <li>
+                                    <a href="per_age.php">Report By Age</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
