@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2017 at 06:04 PM
+-- Generation Time: Aug 11, 2017 at 06:34 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -32,6 +32,13 @@ CREATE TABLE `admin` (
   `username` varchar(15) NOT NULL,
   `password` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `name`, `username`, `password`) VALUES
+(1, 'Lavern Sim', 'lavern', '123');
 
 -- --------------------------------------------------------
 
@@ -161,8 +168,8 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`prod_id`, `prod_name`, `vol_pts`, `c`, `sc`, `sb`, `supv`, `retail`, `profitc`, `profitsc`, `profitsb`, `profitsupv`, `qty`, `reorder`, `cat_id`) VALUES
-(1, 'Formula 1 Canister', 18, 10, 20, 30, 40, 1500, 10, 20, 30, 40, 2, 4, 1),
-(2, 'Formula 2', 18, 10, 20, 30, 40, 1500, 10, 20, 30, 40, 2, 1, 1);
+(1, 'Formula 1 Canister', 18, 10, 20, 30, 40, 1500, 10, 20, 30, 40, 10, 4, 1),
+(2, 'Formula 2', 18, 10, 20, 30, 40, 1500, 10, 20, 30, 40, 20, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -243,7 +250,52 @@ INSERT INTO `result` (`result_id`, `monitor_id`, `weighin_date`, `weight`, `fat`
 (8, 7, '2017-07-26', '1.00', '2', '3', '4', '5', '6', '7', '8', '9', 'l;klk'),
 (9, 7, '2017-07-26', '3.00', '4', '6', '7', '9', '0', '7', '8', '0', 'Day 2'),
 (10, 11, '2017-08-02', '78.00', '6', '7', '8', '8', '9', '65', '67', '6', 'hhj'),
-(11, 11, '2017-08-02', '88.00', '9', '8', '77', '8', '8', '8', '9', '0', 'fcffd');
+(11, 11, '2017-08-02', '88.00', '9', '8', '77', '8', '8', '8', '9', '0', 'fcffd'),
+(12, 11, '2017-08-08', '34.00', '33', '34', '4', '4', '4', '4', '4', '4', 'bn');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stockin`
+--
+
+CREATE TABLE `stockin` (
+  `stockout_id` int(11) NOT NULL,
+  `prod_id` int(11) NOT NULL,
+  `stockin_qty` int(11) NOT NULL,
+  `stockin_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `stockin`
+--
+
+INSERT INTO `stockin` (`stockout_id`, `prod_id`, `stockin_qty`, `stockin_date`) VALUES
+(10, 1, 1, '2017-08-08 20:54:36'),
+(11, 2, 10, '2017-08-08 20:55:09'),
+(12, 1, 5, '2017-08-08 20:55:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stockout`
+--
+
+CREATE TABLE `stockout` (
+  `stockout_id` int(11) NOT NULL,
+  `prod_id` int(11) NOT NULL,
+  `stockout_qty` int(11) NOT NULL,
+  `stockout_date` datetime NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `stockout`
+--
+
+INSERT INTO `stockout` (`stockout_id`, `prod_id`, `stockout_qty`, `stockout_date`, `id`) VALUES
+(8, 1, 1, '2017-08-08 18:56:05', 2),
+(9, 1, 1, '2017-08-08 18:56:05', 2);
 
 -- --------------------------------------------------------
 
@@ -361,16 +413,16 @@ CREATE TABLE `taker` (
   `email` varchar(30) NOT NULL,
   `status` varchar(8) NOT NULL,
   `points` decimal(7,2) NOT NULL,
-  `percent` varchar(10) NOT NULL
+  `discount` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `taker`
 --
 
-INSERT INTO `taker` (`id`, `last`, `first`, `phone`, `gender`, `bday`, `referrer_name`, `referrer_contact`, `address`, `email`, `status`, `points`, `percent`) VALUES
-(1, 'Magbanua', 'Lee', '09051914070', 'Female', '1989-10-14', '', '', 'Bago City', 'emoblazz@gmail.com', 'Active', '0.00', ''),
-(2, 'Gargolez', 'Jurlien', '090767676', 'Female', '1995-10-14', 'Ananiel', '099878', '', '', '', '0.00', '');
+INSERT INTO `taker` (`id`, `last`, `first`, `phone`, `gender`, `bday`, `referrer_name`, `referrer_contact`, `address`, `email`, `status`, `points`, `discount`) VALUES
+(1, 'Magbanua', 'Lee', '09051914070', 'Male', '1989-10-14', '', '', 'Bago City', 'emoblazz@gmail.com', 'Active', '0.00', '0.00'),
+(2, 'Gargolez', 'Jurlien', '090767676', 'Female', '1995-10-14', 'Ananiel', '099878', '', '', '', '18.00', '0.25');
 
 -- --------------------------------------------------------
 
@@ -392,6 +444,19 @@ INSERT INTO `taker_meal` (`taker_meal_id`, `meal_id`, `taker_id`) VALUES
 (1, 1, 2),
 (2, 2, 2),
 (3, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `temp_trans`
+--
+
+CREATE TABLE `temp_trans` (
+  `temp_trans_id` int(11) NOT NULL,
+  `prod_id` int(11) NOT NULL,
+  `prod_qty` int(11) NOT NULL,
+  `points` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -452,6 +517,18 @@ ALTER TABLE `result`
   ADD PRIMARY KEY (`result_id`);
 
 --
+-- Indexes for table `stockin`
+--
+ALTER TABLE `stockin`
+  ADD PRIMARY KEY (`stockout_id`);
+
+--
+-- Indexes for table `stockout`
+--
+ALTER TABLE `stockout`
+  ADD PRIMARY KEY (`stockout_id`);
+
+--
 -- Indexes for table `supplement`
 --
 ALTER TABLE `supplement`
@@ -482,6 +559,12 @@ ALTER TABLE `taker_meal`
   ADD PRIMARY KEY (`taker_meal_id`);
 
 --
+-- Indexes for table `temp_trans`
+--
+ALTER TABLE `temp_trans`
+  ADD PRIMARY KEY (`temp_trans_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -489,7 +572,7 @@ ALTER TABLE `taker_meal`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `category`
 --
@@ -529,7 +612,17 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT for table `result`
 --
 ALTER TABLE `result`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `stockin`
+--
+ALTER TABLE `stockin`
+  MODIFY `stockout_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `stockout`
+--
+ALTER TABLE `stockout`
+  MODIFY `stockout_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `supplement`
 --
@@ -555,6 +648,11 @@ ALTER TABLE `taker`
 --
 ALTER TABLE `taker_meal`
   MODIFY `taker_meal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `temp_trans`
+--
+ALTER TABLE `temp_trans`
+  MODIFY `temp_trans_id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
