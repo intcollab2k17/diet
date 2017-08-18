@@ -66,7 +66,7 @@
 
                         $query3=mysqli_query($con,"select * from initial_result where id='$id' order by ir_date desc LIMIT 0,1")or die(mysqli_error($con));
                                 $row3=mysqli_fetch_array($query3);
-                      
+                                    $iid=$row3['ir_id'];
 ?>                                   
                                     <tr class="odd gradeX">
                                         <td class="center"><?php echo $id;?></td>
@@ -74,12 +74,14 @@
                                         <td><?php echo $row['first'];?></td>
                                         <td><?php echo $age;?></td>
                                         <td><?php echo $row['gender'];?></td>                                        
-                                        <td><?php echo $row1['program_name'];?></td>
+                                        <td><?php echo $row1['program_name'];?>
+                                            <a class="pull-right btn btn-info" href="history.php?id=<?php echo $row['id'];?>">Prev</a>
+                                        </td>
                                         <td><?php echo $i;?></td>
                                         <td><a href="" class="btn btn-warning" data-toggle="modal" data-target="#view<?php echo $mid;?>">View</i></a>
                                         </td>
                                         <td>
-                                            <a href="taker_sup.php?id=<?php echo $id;?>" class="btn btn-warning"><i class="fa fa-glass"></i></a>
+                                            <a href="taker_sup.php?mid=<?php echo $mid;?>" class="btn btn-warning"><i class="fa fa-glass"></i></a>
                                             <a href="monitoring.php?id=<?php echo $id;?>&mid=<?php echo $mid;?>" class="btn btn-info"><i class="glyphicon glyphicon-folder-open"></i></a>
                                             <a href="" class="btn btn-success" data-toggle="modal" data-target="#edit<?php echo $id;?>"><i class="glyphicon glyphicon-share-alt"></i></a>
                                         </td>
@@ -252,6 +254,7 @@
                                             
                                         </div>
                                         <div class="modal-footer">
+                                            <a href="print_initial.php?iid=<?php echo $iid;?>&id=<?php echo $id;?>" class="btn btn-primary">Print</a>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>

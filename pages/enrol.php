@@ -33,7 +33,7 @@ include('session.php');
 
 		        foreach($meal as $m)
 		        {
-		        	mysqli_query($con,"INSERT INTO taker_meal(meal_id,taker_id) 
+		        	mysqli_query($con,"INSERT INTO taker_meal(meal_id,id) 
 						VALUES('$m','$id')")or die(mysqli_error($con));  	
 		        }
 

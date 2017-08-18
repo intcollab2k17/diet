@@ -19,8 +19,8 @@ include('session.php');
 
         if ($count==0)
         {
-			mysqli_query($con,"INSERT INTO taker(last,first,gender,bday,phone,referrer_name,referrer_contact,status) 
-				VALUES('$last','$first','$gender','$bday','$phone','$referrer','$rcontact','Active')")or die(mysqli_error());  
+			mysqli_query($con,"INSERT INTO taker(last,first,gender,bday,phone,referrer_name,referrer_contact,status,height,orig_weight) 
+				VALUES('$last','$first','$gender','$bday','$phone','$referrer','$rcontact','Active','$height','$weight')")or die(mysqli_error());  
 				
 			$id=mysqli_insert_id($con);	
 				

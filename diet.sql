@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2017 at 06:34 AM
+-- Generation Time: Aug 18, 2017 at 11:42 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -38,7 +38,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `name`, `username`, `password`) VALUES
-(1, 'Lavern Sim', 'lavern', '123');
+(1, 'Lavern Sim', 'lavern', '123'),
+(2, 'Gera', 'gera', '123');
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,8 @@ CREATE TABLE `initial_result` (
 
 INSERT INTO `initial_result` (`ir_id`, `id`, `ir_date`, `ir_fat`, `ir_visceral`, `ir_bonemass`, `ir_restingmr`, `ir_metabolic_age`, `ir_muscle_mass`, `ir_physique_rating`, `ir_water`, `ir_ideal_weight`, `ir_excess_fat`, `ir_ideal_visceral`, `ir_height`, `ir_weight`) VALUES
 (1, 1, '2017-07-19', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 454, 56),
-(2, 2, '2017-07-13', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 454, 56);
+(2, 2, '2017-07-13', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 454, 56),
+(3, 3, '2017-08-18', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 150, 50);
 
 -- --------------------------------------------------------
 
@@ -125,19 +127,21 @@ CREATE TABLE `monitoring` (
   `sponsor` varchar(30) NOT NULL,
   `program_id` int(11) NOT NULL,
   `target` varchar(50) NOT NULL,
-  `monitor_status` varchar(15) NOT NULL
+  `monitor_status` varchar(15) NOT NULL,
+  `start_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `monitoring`
 --
 
-INSERT INTO `monitoring` (`monitor_id`, `id`, `sponsor`, `program_id`, `target`, `monitor_status`) VALUES
-(7, 1, '', 1, '', 'Finished'),
-(8, 2, '', 1, '', ''),
-(9, 1, '', 4, '', 'Finished'),
-(10, 1, '', 3, '', ''),
-(11, 1, '', 2, '', '');
+INSERT INTO `monitoring` (`monitor_id`, `id`, `sponsor`, `program_id`, `target`, `monitor_status`, `start_date`) VALUES
+(7, 1, '', 1, '', 'Finished', '0000-00-00'),
+(8, 2, '', 1, '', 'Finished', '0000-00-00'),
+(9, 1, '', 4, '', 'Finished', '0000-00-00'),
+(10, 1, '', 3, '', '', '0000-00-00'),
+(11, 1, '', 2, '', 'Finished', '0000-00-00'),
+(12, 2, '', 2, '', '', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -224,14 +228,14 @@ CREATE TABLE `result` (
   `monitor_id` int(11) NOT NULL,
   `weighin_date` date NOT NULL,
   `weight` decimal(5,2) NOT NULL,
-  `fat` varchar(10) NOT NULL,
-  `visceral` varchar(10) NOT NULL,
-  `bone_mass` varchar(15) NOT NULL,
-  `rmr` varchar(15) NOT NULL,
-  `metabolic_age` varchar(15) NOT NULL,
-  `muscle_mass` varchar(15) NOT NULL,
-  `physique_rating` varchar(15) NOT NULL,
-  `water` varchar(15) NOT NULL,
+  `fat` decimal(5,2) NOT NULL,
+  `visceral` decimal(5,2) NOT NULL,
+  `bone_mass` decimal(5,2) NOT NULL,
+  `rmr` decimal(5,2) NOT NULL,
+  `metabolic_age` decimal(5,2) NOT NULL,
+  `muscle_mass` decimal(5,2) NOT NULL,
+  `physique_rating` decimal(5,2) NOT NULL,
+  `water` decimal(5,2) NOT NULL,
   `remarks` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -240,18 +244,21 @@ CREATE TABLE `result` (
 --
 
 INSERT INTO `result` (`result_id`, `monitor_id`, `weighin_date`, `weight`, `fat`, `visceral`, `bone_mass`, `rmr`, `metabolic_age`, `muscle_mass`, `physique_rating`, `water`, `remarks`) VALUES
-(1, 7, '2017-07-26', '2.00', '23', '30', '11', '90', '88', '90', '90', '78', 'Fay 1'),
-(2, 7, '2017-07-26', '3.00', '4', '6', '7', '9', '0', '7', '8', '0', 'Day 2'),
-(3, 7, '2017-07-26', '3.00', '4', '6', '7', '9', '0', '7', '8', '0', 'Day 2'),
-(4, 7, '2017-07-26', '1.00', '2', '3', '4', '5', '6', '7', '8', '9', 'l;klk'),
-(5, 7, '2017-07-26', '3.00', '4', '6', '7', '9', '0', '7', '8', '0', 'Day 2'),
-(6, 7, '2017-07-26', '3.00', '4', '6', '7', '9', '0', '7', '8', '0', 'Day 2'),
-(7, 7, '2017-07-26', '3.00', '4', '6', '7', '9', '0', '7', '8', '0', 'Day 2'),
-(8, 7, '2017-07-26', '1.00', '2', '3', '4', '5', '6', '7', '8', '9', 'l;klk'),
-(9, 7, '2017-07-26', '3.00', '4', '6', '7', '9', '0', '7', '8', '0', 'Day 2'),
-(10, 11, '2017-08-02', '78.00', '6', '7', '8', '8', '9', '65', '67', '6', 'hhj'),
-(11, 11, '2017-08-02', '88.00', '9', '8', '77', '8', '8', '8', '9', '0', 'fcffd'),
-(12, 11, '2017-08-08', '34.00', '33', '34', '4', '4', '4', '4', '4', '4', 'bn');
+(1, 7, '2017-07-26', '2.00', '23.00', '30.00', '11.00', '90.00', '88.00', '90.00', '90.00', '78.00', 'Fay 1'),
+(2, 7, '2017-07-26', '3.00', '4.00', '6.00', '7.00', '9.00', '0.00', '7.00', '8.00', '0.00', 'Day 2'),
+(3, 7, '2017-07-26', '3.00', '4.00', '6.00', '7.00', '9.00', '0.00', '7.00', '8.00', '0.00', 'Day 2'),
+(4, 7, '2017-07-26', '1.00', '2.00', '3.00', '4.00', '5.00', '6.00', '7.00', '8.00', '9.00', 'l;klk'),
+(5, 7, '2017-07-26', '3.00', '4.00', '6.00', '7.00', '9.00', '0.00', '7.00', '8.00', '0.00', 'Day 2'),
+(6, 7, '2017-07-26', '3.00', '4.00', '6.00', '7.00', '9.00', '0.00', '7.00', '8.00', '0.00', 'Day 2'),
+(7, 7, '2017-07-26', '3.00', '4.00', '6.00', '7.00', '9.00', '0.00', '7.00', '8.00', '0.00', 'Day 2'),
+(8, 7, '2017-07-26', '1.00', '2.00', '3.00', '4.00', '5.00', '6.00', '7.00', '8.00', '9.00', 'l;klk'),
+(9, 7, '2017-07-26', '3.00', '4.00', '6.00', '7.00', '9.00', '0.00', '7.00', '8.00', '0.00', 'Day 2'),
+(10, 11, '2017-08-02', '78.00', '6.00', '7.00', '8.00', '8.00', '9.00', '65.00', '67.00', '6.00', 'hhj'),
+(11, 11, '2017-08-02', '88.00', '9.00', '8.00', '77.00', '8.00', '8.00', '8.00', '9.00', '0.00', 'fcffd'),
+(12, 11, '2017-08-08', '34.00', '33.00', '34.00', '4.00', '4.00', '4.00', '4.00', '4.00', '4.00', 'bn'),
+(13, 10, '2017-08-18', '34.00', '55.00', '65.00', '4.00', '6.00', '6.00', '9.00', '99.00', '0.00', 'Sample'),
+(14, 10, '2017-08-18', '41.00', '8.00', '9.00', '6.00', '9.00', '7.00', '9.00', '7.00', '8.00', 'Test'),
+(15, 8, '2017-08-18', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', 'fgfg');
 
 -- --------------------------------------------------------
 
@@ -294,8 +301,9 @@ CREATE TABLE `stockout` (
 --
 
 INSERT INTO `stockout` (`stockout_id`, `prod_id`, `stockout_qty`, `stockout_date`, `id`) VALUES
-(8, 1, 1, '2017-08-08 18:56:05', 2),
-(9, 1, 1, '2017-08-08 18:56:05', 2);
+(8, 2, 10, '2017-08-14 18:56:05', 2),
+(9, 1, 1, '2017-08-08 18:56:05', 2),
+(10, 1, 15, '2017-09-16 18:56:05', 2);
 
 -- --------------------------------------------------------
 
@@ -345,8 +353,10 @@ INSERT INTO `sup_taker` (`sup_taker`, `monitor_id`, `prod_id`, `count`) VALUES
 (8, 9, 1, 10),
 (9, 10, 2, 10),
 (10, 10, 1, 10),
-(11, 11, 2, 10),
-(12, 11, 1, 10);
+(11, 11, 2, 9),
+(12, 11, 1, 9),
+(13, 12, 2, 10),
+(14, 12, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -392,7 +402,8 @@ INSERT INTO `survey` (`survey_id`, `id`, `question_id`, `answer`) VALUES
 (24, 8, 1, 'yes'),
 (25, 8, 2, 'yes'),
 (26, 8, 3, 'yes'),
-(27, 8, 4, 'yes');
+(27, 8, 4, 'yes'),
+(28, 3, 1, 'yes');
 
 -- --------------------------------------------------------
 
@@ -413,16 +424,19 @@ CREATE TABLE `taker` (
   `email` varchar(30) NOT NULL,
   `status` varchar(8) NOT NULL,
   `points` decimal(7,2) NOT NULL,
-  `discount` decimal(10,2) NOT NULL
+  `discount` decimal(10,2) NOT NULL,
+  `height` decimal(5,2) NOT NULL,
+  `orig_weight` decimal(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `taker`
 --
 
-INSERT INTO `taker` (`id`, `last`, `first`, `phone`, `gender`, `bday`, `referrer_name`, `referrer_contact`, `address`, `email`, `status`, `points`, `discount`) VALUES
-(1, 'Magbanua', 'Lee', '09051914070', 'Male', '1989-10-14', '', '', 'Bago City', 'emoblazz@gmail.com', 'Active', '0.00', '0.00'),
-(2, 'Gargolez', 'Jurlien', '090767676', 'Female', '1995-10-14', 'Ananiel', '099878', '', '', '', '18.00', '0.25');
+INSERT INTO `taker` (`id`, `last`, `first`, `phone`, `gender`, `bday`, `referrer_name`, `referrer_contact`, `address`, `email`, `status`, `points`, `discount`, `height`, `orig_weight`) VALUES
+(1, 'Magbanua', 'Lee', '09051914070', 'Male', '1989-10-14', 'Kaye', '0976767', 'Bago City', 'emoblazz@gmail.com', 'Active', '0.00', '0.00', '156.00', '60.00'),
+(2, 'Gargolez', 'Jurlien', '090767676', 'Female', '1995-10-14', 'Ananiel', '099878', '', '', '', '18.00', '0.25', '0.00', '0.00'),
+(3, 'Cueva', 'Kaye', '092132432', 'Female', '1994-10-24', 'Lee', '09051914070', '', '', 'Active', '0.00', '0.00', '150.00', '50.00');
 
 -- --------------------------------------------------------
 
@@ -433,17 +447,19 @@ INSERT INTO `taker` (`id`, `last`, `first`, `phone`, `gender`, `bday`, `referrer
 CREATE TABLE `taker_meal` (
   `taker_meal_id` int(11) NOT NULL,
   `meal_id` int(11) NOT NULL,
-  `taker_id` int(11) NOT NULL
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `taker_meal`
 --
 
-INSERT INTO `taker_meal` (`taker_meal_id`, `meal_id`, `taker_id`) VALUES
+INSERT INTO `taker_meal` (`taker_meal_id`, `meal_id`, `id`) VALUES
 (1, 1, 2),
 (2, 2, 2),
-(3, 1, 1);
+(3, 1, 1),
+(4, 1, 2),
+(5, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -572,7 +588,7 @@ ALTER TABLE `temp_trans`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `category`
 --
@@ -582,7 +598,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `initial_result`
 --
 ALTER TABLE `initial_result`
-  MODIFY `ir_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ir_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `meal`
 --
@@ -592,7 +608,7 @@ ALTER TABLE `meal`
 -- AUTO_INCREMENT for table `monitoring`
 --
 ALTER TABLE `monitoring`
-  MODIFY `monitor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `monitor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `product`
 --
@@ -612,7 +628,7 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT for table `result`
 --
 ALTER TABLE `result`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `stockin`
 --
@@ -622,7 +638,7 @@ ALTER TABLE `stockin`
 -- AUTO_INCREMENT for table `stockout`
 --
 ALTER TABLE `stockout`
-  MODIFY `stockout_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `stockout_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `supplement`
 --
@@ -632,22 +648,22 @@ ALTER TABLE `supplement`
 -- AUTO_INCREMENT for table `sup_taker`
 --
 ALTER TABLE `sup_taker`
-  MODIFY `sup_taker` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `sup_taker` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `taker`
 --
 ALTER TABLE `taker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `taker_meal`
 --
 ALTER TABLE `taker_meal`
-  MODIFY `taker_meal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `taker_meal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `temp_trans`
 --

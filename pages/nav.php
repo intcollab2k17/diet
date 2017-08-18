@@ -85,6 +85,9 @@
                                 <li>
                                     <a href="questions.php">Survey Questions</a>
                                 </li>
+                                <li>
+                                    <a href="user.php">User</a>
+                                </li>
                             
                             </ul>
                             <!-- /.nav-second-level -->
@@ -120,21 +123,16 @@
                                 <li>
                                     <a href="per_age.php">Report By Age</a>
                                 </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Calendar<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="blank.html">Blank Page</a>
+                                    <a href="sales.php">Monthly Sales Report</a>
                                 </li>
                                 <li>
-                                    <a href="login.html">Login Page</a>
+                                    <a href="yearly.php">Yearly Sales Report</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                       
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

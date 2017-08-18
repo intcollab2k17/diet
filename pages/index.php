@@ -126,6 +126,20 @@
                 </div>
                 
             </div>
+             <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Product Sales Report
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="sales-graph"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+            </div>
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-8">
@@ -405,7 +419,67 @@
             
             
         });   
-        </script>
+        </script><script type="text/javascript">
+    $(document).ready(function() {
+      var options = {
+              chart: {
+                  renderTo: 'sales-graph',
+                  type: 'column',
+                  marginRight: 10,
+                  marginBottom: 25
+                
+              },
+              title: {
+                  text: '',
+                  x: -20 //center
+              },
+              subtitle: {
+                  text: '',
+                  x: -10
+              },
+              xAxis: {
+                  categories: []
+              },
+              yAxis: {
+                  
+                  title: {
+                      text: 'Taker\'s Weight Record'
+                  },
+                  plotLines: [{
+                      value: 0,
+                      width: 1,
+                      color: '#808080'
+                  }]
+              },
+              tooltip: {
+                  formatter: function() {
+                          return '<b>'+ this.series.name +'</b><br/>'+  Highcharts.numberFormat(this.y, 0)
+                          this.x +': '+ this.y
+                          
+                  ;
+                  }
+              },
+              legend: {
+                  layout: 'vertical',
+                  align: 'right',
+                  verticalAlign: 'top',
+                  x: 0,
+                  y: 100,
+                  borderWidth: 0
+              },
+              series: []
+          }
+          
+          $.getJSON("datasales.php", function(json) {
+            options.xAxis.categories = json[0]['name'];
+            options.series[0] = json[1];
+            //options.series[1] = json[2];
+            
+            
+            chart = new Highcharts.Chart(options);
+          });
+      });
+    </script>
       <script src="../js/highcharts.js"></script>
         <script src="../js/exporting.js"></script>
 </body>
