@@ -173,10 +173,10 @@
                                                     <th>Age</th>
                                                     <th>Gender</th>
                                                     <th>Program</th>
-                                                    <th>Day</th>
+                                                    <th>Expected End Date</th>
                                                 </tr>
 <?php
-
+        $a=1;
         $query=mysqli_query($con,"select * from taker order by last,first")or die(mysqli_error($con));
           while ($row=mysqli_fetch_array($query)){
             $id=$row['id'];
@@ -186,23 +186,24 @@
                 $row1=mysqli_fetch_array($query1);
                       $mid=$row1['monitor_id'];
                       $day=$row1['day'];
-
-                        $query3=mysqli_query($con,"select * from initial_result where id='$id' order by ir_date desc LIMIT 0,1")or die(mysqli_error($con));
+                      $start=$row1['start_date'];
+                      $end = date("Y-m-d",strtotime($start. " + 10 days")); 
+                        $query3=mysqli_query($con,"select * from result where monitor_id='$mid'")or die(mysqli_error($con));
                                 $row3=mysqli_fetch_array($query3);
-                      
+                                    //$date=$row1['weighin_date'];
 ?>                                                                                   
                                             </thead>
                                             <tbody>
                                     <tr class="odd gradeX">
-                                        <td class="center"><?php echo $id;?></td>
+                                        <td class="center"><?php echo $a;?></td>
                                         <td><?php echo $row['last'];?></td>
                                         <td><?php echo $row['first'];?></td>
                                         <td><?php echo $age;?></td>
                                         <td><?php echo $row['gender'];?></td>                                        
                                         <td><?php echo $row1['program_name'];?></td>
-                                        <td>Day <?php echo $i;?></td>
+                                        <td><?php echo date("M d, Y",strtotime($end));?></td>
                                     </tr>
-<?php }?>
+<?php $a++;}?>
                                             </tbody>
                                         </table>
                                     </div>

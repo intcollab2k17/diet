@@ -38,6 +38,9 @@
                             <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
+                            <a href="calendar.php"><i class="fa fa-calendar fa-fw"></i> Calendar</a>
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-book fa-fw"></i> Profiling <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>

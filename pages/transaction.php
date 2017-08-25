@@ -155,6 +155,7 @@
                                                   <div class="form-group">
                                                     <label for="date">Discount %</label>
                                                         <select class="form-control select2" name="discount" tabindex="1">
+                                                                <option value="1">None</option>
                                                                 <option value=".25">25</option>
                                                                 <option value=".35">35</option>
                                                                 <option value=".42">42</option>
