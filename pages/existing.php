@@ -59,6 +59,10 @@
             $id=$row['id'];
             $age = date_create($row['bday'])->diff(date_create('today'))->y;
             $gender=$row['gender'];
+            $last=$row['last'];
+            $first=$row['first'];
+            $bday=$row['bday'];
+            $status=$row['status'];
 
              $query1=mysqli_query($con,"select *,COUNT(*) as day from monitoring natural join program where id='$id' and monitor_status!='Finished' order by monitor_id desc LIMIT 0,1")or die(mysqli_error($con));
                 
@@ -88,8 +92,8 @@
                                         <td>
                                             <a href="taker_sup.php?mid=<?php echo $mid;?>" class="btn btn-warning"><i class="fa fa-glass"></i></a>
                                             <a href="monitoring.php?id=<?php echo $id;?>&mid=<?php echo $mid;?>" class="btn btn-info"><i class="glyphicon glyphicon-folder-open"></i></a>
-                                            <a href="" class="btn btn-success" data-toggle="modal" data-target="#edit<?php echo $id;?>"><i class="glyphicon glyphicon-share-alt"></i></a>
-                                            <a href="" class="btn btn-danger" data-toggle="modal" data-target="#delete<?php echo $id;?>"><i class="glyphicon glyphicon-pencil"></i></a>
+                                            <a class="btn btn-success" data-toggle="modal" data-target="#edit<?php echo $id;?>"><i class="glyphicon glyphicon-share-alt"></i></a>
+                                            <a class="btn btn-danger" data-toggle="modal" data-target="#delete<?php echo $id;?>"><i class="glyphicon glyphicon-pencil"></i></a>
                                         </td>
                                     </tr>
                             <!-- Modal -->
@@ -295,7 +299,7 @@
                             </div>
                             <!-- /.modal -->                                        
                             <!-- Modal -->
-                            <div class="modal fade" id="delete<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="delete<?php echo $id;?>" tabindex="-6" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                  <form method="post" action="taker_update.php">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -310,7 +314,7 @@
                                                 <div class="col-lg-8">
                                                     <div class="form-group">
                                                        <label>Last Name</label>
-                                                        <input class="form-control" name="last" placeholder="Last Name" value="<?php echo $row['last'];?>">
+                                                        <input class="form-control" name="last" placeholder="Last Name" value="<?php echo $last;?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -319,7 +323,7 @@
                                                 <div class="col-lg-8">
                                                     <div class="form-group">
                                                        <label>First Name</label>
-                                                        <input class="form-control" name="first" placeholder="First Name" value="<?php echo $row['first'];?>">
+                                                        <input class="form-control" name="first" placeholder="First Name" value="<?php echo $first;?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -328,7 +332,7 @@
                                                 <div class="col-lg-8">
                                                     <div class="form-group">
                                                        <label>Birthday</label>
-                                                        <input class="form-control" type="date" name="bday" placeholder="Birthday" value="<?php echo $row['bday'];?>">
+                                                        <input class="form-control" type="date" name="bday" placeholder="Birthday" value="<?php echo $bday;?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -338,7 +342,7 @@
                                                     <div class="form-group">
                                                        <label>Status</label>
                                                         <select class="form-control" name="status">
-                                                         <option><?php echo $row['status'];?></option>
+                                                         <option><?php echo $status;?></option>
                                                          <option>Active</option>
                                                          <option>Inactive</option>
                                                         </select>

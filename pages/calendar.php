@@ -80,7 +80,7 @@
                     <tbody>
 <?php
         
-        $query=mysqli_query($con,"select * from schedule order by sched_from desc")or die(mysqli_error());
+        $query=mysqli_query($con,"select * from schedule order by sched_from desc")or die(mysqli_error($con));
         while($row=mysqli_fetch_array($query)){
         
 ?>  
