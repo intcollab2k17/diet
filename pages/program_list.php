@@ -27,7 +27,9 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Takers' List Per Program</h1>
+                    <div class="col-lg-12">
+                    <h4 style="text-align: center;">RDA Happy Fit Club <br>Circumferential Road, Carlos Hilado Highway, Brgy. Bata <br>09267486448/09212812057</h4>
+                   <h3 class="page-header" style="text-align: center;">Takers' List Per Program</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
