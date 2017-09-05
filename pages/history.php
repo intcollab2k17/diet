@@ -34,6 +34,29 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
+                    <div class="col-lg-12">
+                     <table width="70%" class="table table-striped table-bordered table-hover" id="">
+                                
+                                <tbody>
+                    <?php
+
+        $query=mysqli_query($con,"select * from survey natural join question")or die(mysqli_error($con));
+            $i=1;
+          while ($row=mysqli_fetch_array($query)){
+          
+?>                                   
+                                    <tr class="odd gradeX">
+                                        <td class="center"><?php echo $i;?></td>
+                                        <td><?php echo $row['question'];?></td>
+                                       <td><?php echo $row['answer'];?></td>
+                                    </tr>
+                                                          
+<?php $i++;}?>                                    
+                                    
+                                   
+                                </tbody>
+                            </table>
+                        </div>
                     <div class="panel panel-default">
                         <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -46,8 +69,14 @@
 ?>        
                         </div>
                         <!-- .panel-heading -->
-                        <div class="panel-body">
+                       
+                                 
+                                    
+                                   
+                               
 
+                        <div class="panel-body">
+                        
                             <div class="panel-group" id="accordion">
 <?php
         $query=mysqli_query($con,"select * from monitoring natural join program where id='$id' and monitor_status='Finished'")or die(mysqli_error($con));
@@ -62,6 +91,7 @@
                                     </div>
                                     <div id="collapse<?php echo $row['monitor_id'];?>" class="panel-collapse collapse">
                                         <div class="panel-body">
+                                        
                                                                         <table width="100%" class="table table-striped table-bordered table-hover">
                                 <thead>
 <?php 

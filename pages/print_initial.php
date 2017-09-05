@@ -56,7 +56,7 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <table style="width: 100%;"  class="noborder">
+                <table style="width: 100%;text-align: left"  class="noborder">
                     <tr>
                         <td>Last Name: </td>
                         <th><?php echo strtoupper($rm['last']); ?></th>
@@ -73,11 +73,17 @@
                         <td>Height: <b><?php echo $rm['height'];?></b></td>
                         <td>Weight: <b><?php echo $rm['orig_weight'];?></b></td>
                         <td>Invited By: </td>
-                        <th><?php echo strtoupper($rm['referrer_name']);?></th>
+                        <th>
+                        <?php
+                        $rid=$rm['referrer_id'];
+                        $referrer=mysqli_query($con,"select * from taker where id='$rid'")or die(mysqli_error($con));
+                            $r=mysqli_fetch_array($referrer);
+                            echo strtoupper($r['last'].", ".$r['first']);?></th>
                         <td>Contact #: </td>
                         <th><?php echo strtoupper($rm['referrer_contact']);?></th>
                     </tr>    
                 </table>
+
                               <br>
     
                             <table width="100%" class="border">
@@ -117,6 +123,36 @@
                                         <td><?php echo $row['ir_muscle_mass'];?></td>
                                         <td><?php echo $row['ir_physique_rating'];?></td>
                                         <td><?php echo $row['ir_water'];?></td>
+                                       
+                                    </tr>                                    
+                                   
+                                </tbody>
+                            </table>
+                            <img src="../dist/img/body_index.jpg" style="width: 30%;float: left">
+                            <br>
+                            <table width="30%" class="border" style="float: right">
+                                <thead>
+                                    <tr>
+                                        <th>BODY MASS INDEX</th>
+                                        <th>BODY FAT INDEX</th>
+                                        <th>REMARKS</th>
+                                        
+                                    </tr>
+
+<?php
+             $query=mysqli_query($con,"select * from initial_result where ir_id='$iid'")or die(mysqli_error($con));
+                $day=1;
+                $row=mysqli_fetch_array($query);
+                   
+                    $bmi=$row['bmi'];
+?>                                
+                                    
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><?php echo number_format($bmi,1);?> kg/m2</td>
+                                        <td><?php echo $row['bfi'];?></td>
+                                        <td><?php echo $row['remarks'];?></td>
                                        
                                     </tr>                                    
                                    

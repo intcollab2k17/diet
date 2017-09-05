@@ -10,7 +10,8 @@ include('session.php');
 		mysqli_query($con,"UPDATE monitoring SET monitor_status='Finished' where monitor_id='$mid'")
 	 or die(mysqli_error($con)); 
 
-	
+		mysqli_query($con,"DELETE FROM taker_meal WHERE id ='$id'")or die(mysqli_error($con));
+
 	$query = mysqli_query($con,"SELECT * FROM monitoring where id='$id' and monitor_status<>'Finished'"); 
         $count = mysqli_num_rows($query);
 

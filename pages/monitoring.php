@@ -51,6 +51,40 @@
                         <div class="panel-body">
                             <table width="100%" class="table table-striped table-bordered table-hover">
                                 <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Question</th>
+                                        <th>Answer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+<?php
+
+        $query=mysqli_query($con,"select * from question order by question")or die(mysqli_error($con));
+            $i=1;
+          while ($row=mysqli_fetch_array($query)){
+            $id=$row['question_id'];
+
+                $query1=mysqli_query($con,"select * from survey where question_id='$id'")or die(mysqli_error($con));
+            
+                    $row1=mysqli_fetch_array($query1);
+                    $answer=$row1['answer'];
+
+?>                                   
+                                    <tr class="odd gradeX">
+                                        <td class="center"><?php echo $i;?></td>
+                                        <td><?php echo $row['question'];?></td>
+                                        <td>
+                                            <a href="" class="btn btn-info btn-circle"><?php echo $answer;?></a>
+                                        </td>
+                                    </tr>                                  
+<?php $i++;}?>                                    
+                                    
+                                   
+                                </tbody>
+                            </table>
+                            <table width="100%" class="table table-striped table-bordered table-hover">
+                                <thead>
 <?php 
 $mid=$_REQUEST['mid'];
 $labels=array("DATES OF WEIGH-IN","WEIGHT","FAT%","VISCERAL FAT","BONE MASS","RMR (INCAL)","METABOLIC AGE","MUSCLE MASS","PHYSIQUE RATING","WATER %","REMARKS");

@@ -52,7 +52,7 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <table style="width: 100%;"  class="noborder">
+                <table style="width: 100%;text-align: left;"  class="noborder">
                     <tr>
                         <td>Last Name: </td>
                         <th><?php echo strtoupper($rm['last']); ?></th>
@@ -69,7 +69,13 @@
                         <td>Height: <b><?php echo $rm['height'];?></b></td>
                         <td>Weight: <b><?php echo $rm['orig_weight'];?></b></td>
                         <td>Invited By: </td>
-                        <th><?php echo strtoupper($rm['referrer_name']);?></th>
+                        <th>
+                        <?php
+                        $rid=$rm['referrer_id'];
+                        $referrer=mysqli_query($con,"select * from taker where id='$rid'")or die(mysqli_error($con));
+                            $r=mysqli_fetch_array($referrer);
+                            echo strtoupper($r['last'].", ".$r['first']);?></th>
+
                         <td>Contact #: </td>
                         <th><?php echo strtoupper($rm['referrer_contact']);?></th>
                     </tr>    

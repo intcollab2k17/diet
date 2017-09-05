@@ -47,7 +47,10 @@
                                     <a href="new.php"> New Taker </a>
                                 </li>
                                 <li>
-                                    <a href="existing.php">Existing Taker</a>
+                                    <a href="existing.php">Existing Takers</a>
+                                </li>
+                                <li>
+                                    <a href="old.php">Inactive Takers</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -91,6 +94,12 @@
                                 <li>
                                     <a href="user.php">User</a>
                                 </li>
+                                <li>
+                                    <a href="bfi.php">BFI Table</a>
+                                </li>
+                                <li>
+                                    <a href="backup.php">Backup</a>
+                                </li>
                             
                             </ul>
                             <!-- /.nav-second-level -->
@@ -122,6 +131,9 @@
                                 </li>
                                 <li>
                                     <a href="inventory.php">Inventory</a>
+                                </li>
+                                <li>
+                                    <a href="referrer.php">Top Referrer</a>
                                 </li>
                                 <li>
                                     <a href="per_age.php">Report By Age</a>

@@ -6,4 +6,6 @@ if (!isset($_SESSION['id']) || (trim($_SESSION['id']) == '')) { ?>
 <script>
 window.location = "../index.html";
 </script>
-<?php }?>
+<?php }
+date_default_timezone_set("Asia/Manila");
+?>

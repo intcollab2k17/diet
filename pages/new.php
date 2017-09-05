@@ -83,7 +83,7 @@
                                 <div class="col-lg-2">
                                     <div class="form-group">
                                        <label>Height</label>
-                                        <input class="form-control" name="height" placeholder="Height in cm">
+                                        <input class="form-control" name="height" placeholder="Height in meter">
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
@@ -95,7 +95,15 @@
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                        <label>Invited by</label>
-                                        <input class="form-control" name="referrer" placeholder="Name of referrer">
+                                         <select class="form-control" name="referrer">
+<?php
+
+    $result = mysqli_query($con,"SELECT * FROM taker ORDER BY last,first"); 
+        while ($row = mysqli_fetch_assoc($result)){
+?>
+                                     <option value="<?php echo $row['id'];?>"><?php echo $row['last'].", ".$row['first'];?></option>
+<?php } ?> 
+                                                            </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">

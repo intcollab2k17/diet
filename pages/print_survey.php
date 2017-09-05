@@ -19,11 +19,11 @@
             $id=$row['id'];
             $age = date_create($row['bday'])->diff(date_create('today'))->y;
 ?>   	
-		<table style="width: 100% ">
+		<table style="width: 100%;text-align: left">
 			<tr>
 				<td colspan="4">Name: <?php echo $row['first']." ".$row['last'];?></td>
 				<td colspan="2">Age: <?php echo $age;?></td>
-				<td colspan="2">Height: <?php echo $row['ir_height'];?></td>
+				<td colspan="2">Height: <?php echo $row['ir_height'];?> m</td>
 			</tr>
 			<tr style="text-align: center;">
 				<td colspan="8"><h3>WELLNESS EVALUATION RESULTS</h3></td>
@@ -50,18 +50,47 @@
 				<td><?php echo $row['ir_physique_rating'];?></td>
 				<td><?php echo $row['ir_water'];?></td>
 			</tr>
+		</table><br>
+		<table width="50%" class="border" style="float: right">	
 			<tr class="border">
-				<td colspan="6"></td>
 				<td>Present Weight</td>
 				<td>Ideal Weight</td>
 				<td>Ideal Visceral</td>
 			</tr>
 			<tr class="border">
-				<td colspan="6"></td>
 				<td><?php echo $row['ir_weight'];?></td>
 				<td><?php echo $row['ir_ideal_weight'];?></td>
 				<td><?php echo $row['ir_ideal_visceral'];?></td>
 			</tr>
-		</table>		<img src="../dist/img/body_index.jpg" style="width: 50%">
+		</table>		<img src="../dist/img/body_index.jpg" style="width: 30%;float: left">
+
+		<br><br><br><br>
+                            <table width="50%" class="border" style="float: right">
+                                <thead>
+                                    <tr>
+                                        <td>BODY MASS INDEX</td>
+                                        <td>BODY FAT INDEX</td>
+                                        <td>REMARKS</td>
+                                        
+                                    </tr>
+
+<?php
+             $query=mysqli_query($con,"select * from initial_result where ir_id='$irid'")or die(mysqli_error($con));
+                $row=mysqli_fetch_array($query);
+                   
+                    $bmi=$row['bmi'];
+?>                                
+                                    
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><?php echo number_format($bmi,1);?> kg/m2</td>
+                                        <td><?php echo $row['bfi'];?></td>
+                                        <td><?php echo $row['remarks']?></td>
+                                       
+                                    </tr>                                    
+                                   
+                                </tbody>
+                            </table>
 	</body>
 </html>

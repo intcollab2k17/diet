@@ -54,19 +54,24 @@
                                 <tbody>
 <?php
 
-        $query=mysqli_query($con,"select * from taker order by last,first")or die(mysqli_error($con));
+        $query=mysqli_query($con,"select * from taker where status='Active' order by last,first")or die(mysqli_error($con));
           while ($row=mysqli_fetch_array($query)){
             $id=$row['id'];
             $age = date_create($row['bday'])->diff(date_create('today'))->y;
+            $gender=$row['gender'];
 
              $query1=mysqli_query($con,"select *,COUNT(*) as day from monitoring natural join program where id='$id' and monitor_status!='Finished' order by monitor_id desc LIMIT 0,1")or die(mysqli_error($con));
+                
                 $row1=mysqli_fetch_array($query1);
                       $mid=$row1['monitor_id'];
                       $day=$row1['day'];
 
+
                         $query3=mysqli_query($con,"select * from initial_result where id='$id' order by ir_date desc LIMIT 0,1")or die(mysqli_error($con));
                                 $row3=mysqli_fetch_array($query3);
                                     $iid=$row3['ir_id'];
+                                    $height=$row3['ir_height'];
+                                    $weight=$row3['ir_weight'];
 ?>                                   
                                     <tr class="odd gradeX">
                                         <td class="center"><?php echo $id;?></td>
@@ -78,12 +83,13 @@
                                             <a class="pull-right btn btn-info" href="history.php?id=<?php echo $row['id'];?>">Prev</a>
                                         </td>
                                         <td><?php echo $i;?></td>
-                                        <td><a href="" class="btn btn-warning" data-toggle="modal" data-target="#view<?php echo $mid;?>">View</i></a>
+                                        <td><a href="" class="btn btn-warning" data-toggle="modal" data-target="#view<?php echo $iid;?>">View</i></a>
                                         </td>
                                         <td>
                                             <a href="taker_sup.php?mid=<?php echo $mid;?>" class="btn btn-warning"><i class="fa fa-glass"></i></a>
                                             <a href="monitoring.php?id=<?php echo $id;?>&mid=<?php echo $mid;?>" class="btn btn-info"><i class="glyphicon glyphicon-folder-open"></i></a>
                                             <a href="" class="btn btn-success" data-toggle="modal" data-target="#edit<?php echo $id;?>"><i class="glyphicon glyphicon-share-alt"></i></a>
+                                            <a href="" class="btn btn-danger" data-toggle="modal" data-target="#delete<?php echo $id;?>"><i class="glyphicon glyphicon-pencil"></i></a>
                                         </td>
                                     </tr>
                             <!-- Modal -->
@@ -111,12 +117,12 @@
                                                         <label>Select Wellness Program</label>
                                                         <?php
 
-                                                                    $result = mysqli_query($con,"SELECT * FROM program ORDER BY program_name"); 
-                                                                        while ($row = mysqli_fetch_assoc($result)){
+                                                                    $result1 = mysqli_query($con,"SELECT * FROM program ORDER BY program_name"); 
+                                                                        while ($row1 = mysqli_fetch_assoc($result1)){
                                                         ?>
                                                         <div class="radio">
                                                             <label>
-                                                                <input type="radio" name="program" id="optionsRadios1" value="<?php echo $row['program_id'];?>"><?php echo $row['program_name'];?>
+                                                                <input type="radio" name="program" id="optionsRadios1" value="<?php echo $row1['program_id'];?>"><?php echo $row1['program_name'];?>
                                                             </label>
                                                         </div>
                                                                 
@@ -126,12 +132,12 @@
                                                         <label>Recommended Daily Dietary Supplement</label>
                                                         <?php
 
-                                                                    $result = mysqli_query($con,"SELECT * FROM supplement natural join product ORDER BY prod_name"); 
-                                                                        while ($row = mysqli_fetch_assoc($result)){
+                                                                    $result2 = mysqli_query($con,"SELECT * FROM supplement natural join product ORDER BY prod_name"); 
+                                                                        while ($row2 = mysqli_fetch_assoc($result2)){
                                                         ?>
                                                         <div class="radio">
                                                             <label>
-                                                               <?php echo $row['prod_name'];?>
+                                                               <?php echo $row2['prod_name'];?>
                                                             </label>
                                                         </div>
                                                                 
@@ -142,12 +148,12 @@
                                                         <label>Recommended Meal</label>
                                                         <?php
 
-                                                                    $result = mysqli_query($con,"SELECT * FROM meal"); 
-                                                                        while ($row = mysqli_fetch_assoc($result)){
+                                                                    $result4 = mysqli_query($con,"SELECT * FROM meal"); 
+                                                                        while ($row4 = mysqli_fetch_assoc($result4)){
                                                         ?>
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input type="checkbox" name="meal[]" value="<?php echo $row['meal_id'];?>"><?php echo $row['meal_time'];?> - <?php echo $row['meal'];?> (<?php echo $row['calories'];?> cal)
+                                                                <input type="checkbox" name="meal[]" value="<?php echo $row4['meal_id'];?>"><?php echo $row4['meal_time'];?> - <?php echo $row4['meal'];?> (<?php echo $row4['calories'];?> cal)
                                                             </label>
                                                         </div>
                                                                 
@@ -167,7 +173,7 @@
                             </div>
                             <!-- /.modal -->  
                             <!-- Modal -->
-                            <div class="modal fade" id="view<?php echo $mid;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="view<?php echo $iid;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -176,29 +182,35 @@
                                         </div>
                                         <div class="modal-body">
                                             <!--row-->
+                                            <form method="post" action="iir_edit.php">
+                                                <input class="form-control" type="hidden" name="id" value="<?php echo $id;?>" required>
+                                                <input class="form-control" type="hidden" name="gender" value="<?php echo $gender;?>" required>
+                                                <input class="form-control" type="hidden" name="age" value="<?php echo $age;?>" required>
+                                                <input class="form-control" type="hidden" name="height" value="<?php echo $height;?>" required>
+                                                <input class="form-control" type="hidden" name="weight" value="<?php echo $weight;?>" required>
                                             <div class="row">
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                        <label>Fat%</label>
-                                                        <input class="form-control" name="fat" placeholder="Fat %" value="<?php echo $row3['ir_fat'];?>" readonly>
+                                                        <input class="form-control" name="fat" placeholder="Fat %" value="<?php echo $row3['ir_fat'];?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                        <label>Visceral</label>
-                                                        <input class="form-control" name="visceral" placeholder="Visceral Fat" value="<?php echo $row3['ir_visceral'];?>" readonly>
+                                                        <input class="form-control" name="visceral" placeholder="Visceral Fat" value="<?php echo $row3['ir_visceral'];?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                        <label>BM</label>
-                                                        <input class="form-control" name="bone_mass" placeholder="Bone Mass" value="<?php echo $row3['ir_bonemass'];?>" readonly>
+                                                        <input class="form-control" name="bone_mass" placeholder="Bone Mass" value="<?php echo $row3['ir_bonemass'];?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                        <label>RMR</label>
-                                                        <input class="form-control" name="rmr" placeholder="Resting Metabolic Rate#" value="<?php echo $row3['ir_restingmr'];?>" readonly>
+                                                        <input class="form-control" name="rmr" placeholder="Resting Metabolic Rate#" value="<?php echo $row3['ir_restingmr'];?>" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -208,25 +220,25 @@
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                        <label>M Age</label>
-                                                        <input class="form-control" name="m_age" placeholder="Metabolic Age" value="<?php echo $row3['ir_metabolic_age'];?>" readonly>
+                                                        <input class="form-control" name="m_age" placeholder="Metabolic Age" value="<?php echo $row3['ir_metabolic_age'];?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                        <label>M Mass</label>
-                                                        <input class="form-control" name="muscle_mass" placeholder="Muscle Mass" value="<?php echo $row3['ir_muscle_mass'];?>" readonly>
+                                                        <input class="form-control" name="muscle_mass" placeholder="Muscle Mass" value="<?php echo $row3['ir_muscle_mass'];?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                        <label>PR</label>
-                                                        <input class="form-control" name="prating" placeholder="Physique Rating" value="<?php echo $row3['ir_physique_rating'];?>" readonly>
+                                                        <input class="form-control" name="prating" placeholder="Physique Rating" value="<?php echo $row3['ir_physique_rating'];?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                        <label>Water %</label>
-                                                        <input class="form-control" name="water" placeholder="Water %" value="<?php echo $row3['ir_water'];?>" readonly>
+                                                        <input class="form-control" name="water" placeholder="Water %" value="<?php echo $row3['ir_water'];?>" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -234,19 +246,37 @@
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                        <label>Ideal Weight</label>
-                                                        <input class="form-control" name="ideal_weight" placeholder="Ideal Weight" value="<?php echo $row3['ir_ideal_weight'];?>" readonly>
+                                                        <input class="form-control" name="ideal_weight" placeholder="Ideal Weight" value="<?php echo $row3['ir_ideal_weight'];?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                        <label>Excess Fat</label>
-                                                        <input class="form-control" name="excess_fat" placeholder="Excess Fat" value="<?php echo $row3['ir_excess_fat'];?>" readonly>
+                                                        <input class="form-control" name="excess_fat" placeholder="Excess Fat" value="<?php echo $row3['ir_excess_fat'];?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                        <label>Ideal Visceral</label>
-                                                        <input class="form-control" name="ideal_visceral" placeholder="Ideal Visceral" value="<?php echo $row3['ir_ideal_visceral'];?>" readonly>
+                                                        <input class="form-control" name="ideal_visceral" placeholder="Ideal Visceral" value="<?php echo $row3['ir_ideal_visceral'];?>" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                       <label>Body mass Index</label>
+                                                        <input class="form-control" name="" placeholder="BMI" value="<?php echo $row3['bmi'];?>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                       <label>Remarks</label>
+                                                        <input class="form-control" name="" placeholder="Remarks" value="<?php echo $row3['remarks'];?>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                       <label>BFI</label>
+                                                        <input class="form-control" name="" placeholder="BFI" value="<?php echo $row3['bfi'];?>" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -254,7 +284,8 @@
                                             
                                         </div>
                                         <div class="modal-footer">
-                                            <a href="print_initial.php?iid=<?php echo $iid;?>&id=<?php echo $id;?>" class="btn btn-primary">Print</a>
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                            <a href="print_initial.php?iid=<?php echo $iid;?>&id=<?php echo $id;?>" class="btn btn-success">Print</a>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
@@ -262,6 +293,70 @@
                                 </div>
                                 <!-- /.modal-dialog -->
                             </div>
+                            <!-- /.modal -->                                        
+                            <!-- Modal -->
+                            <div class="modal fade" id="delete<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                 <form method="post" action="taker_update.php">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Update Taker's Details</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!--row-->
+                                            <input class="form-control" name="id" type="hidden" value="<?php echo $id;?>">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <div class="form-group">
+                                                       <label>Last Name</label>
+                                                        <input class="form-control" name="last" placeholder="Last Name" value="<?php echo $row['last'];?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--row-->
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <div class="form-group">
+                                                       <label>First Name</label>
+                                                        <input class="form-control" name="first" placeholder="First Name" value="<?php echo $row['first'];?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--row-->
+                                             <div class="row">
+                                                <div class="col-lg-8">
+                                                    <div class="form-group">
+                                                       <label>Birthday</label>
+                                                        <input class="form-control" type="date" name="bday" placeholder="Birthday" value="<?php echo $row['bday'];?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--row-->        
+                                             <div class="row">
+                                                <div class="col-lg-8">
+                                                    <div class="form-group">
+                                                       <label>Status</label>
+                                                        <select class="form-control" name="status">
+                                                         <option><?php echo $row['status'];?></option>
+                                                         <option>Active</option>
+                                                         <option>Inactive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--row-->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" name="edit">Save</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            </form>
                             <!-- /.modal -->                                        
 <?php }?>                                    
                                     
