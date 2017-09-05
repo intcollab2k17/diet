@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="delete<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form method="post" action="taker_update.php">
+    <form method="post" action="taker_update.php" name="taker_update">
         <div class="modal-dialog">
                 <div class="modal-content">
                         <div class="modal-header">

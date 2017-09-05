@@ -40,7 +40,7 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>ID no.</th>
+                                        <th>Points</th>
                                         <th>Last Name</th>
                                         <th>First Name</th>
                                         <th>Age</th>
@@ -66,7 +66,7 @@
                                     $iid=$row3['ir_id'];
 ?>                                   
                                     <tr class="odd gradeX">
-                                        <td class="center"><?php echo $id;?></td>
+                                        <td class="center"><?php echo $row['points'];?></td>
                                         <td><?php echo $row['last'];?></td>
                                         <td><?php echo $row['first'];?></td>
                                         <td><?php echo $age;?></td>

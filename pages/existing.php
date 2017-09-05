@@ -40,7 +40,7 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>ID no.</th>
+                                        <th>Points</th>
                                         <th>Last Name</th>
                                         <th>First Name</th>
                                         <th>Age</th>
@@ -78,7 +78,7 @@
                                     $weight=$row3['ir_weight'];
 ?>                                   
                                     <tr class="odd gradeX">
-                                        <td class="center"><?php echo $id;?></td>
+                                        <td class="center"><?php echo $row['points'];?></td>
                                         <td><?php echo $row['last'];?></td>
                                         <td><?php echo $row['first'];?></td>
                                         <td><?php echo $age;?></td>
@@ -187,7 +187,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <!--row-->
-                                            <form method="post" action="iir_edit.php">
+                                            <form method="post" action="iir_edit.php" novalidate>
                                                 <input class="form-control" type="hidden" name="id" value="<?php echo $id;?>" required>
                                                 <input class="form-control" type="hidden" name="gender" value="<?php echo $gender;?>" required>
                                                 <input class="form-control" type="hidden" name="age" value="<?php echo $age;?>" required>
