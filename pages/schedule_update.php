@@ -1,6 +1,6 @@
 <?php include('session.php');
-
-include('../dist/includes/dbcon.php');
+error_reporting(0);
+//include('../dist/includes/dbcon.php');
 $from = $_POST['from'];
 $to = $_POST['to'];
 $time = $_POST['time'];
