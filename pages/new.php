@@ -96,6 +96,7 @@
                                     <div class="form-group">
                                        <label>Invited by</label>
                                          <select class="form-control" name="referrer">
+                                            <option value="0">None</option>
 <?php
 
     $result = mysqli_query($con,"SELECT * FROM taker ORDER BY last,first"); 

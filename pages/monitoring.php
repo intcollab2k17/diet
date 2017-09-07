@@ -32,8 +32,12 @@
                 $mid=$_REQUEST['mid'];
                 $_SESSION['mid'] = $mid; 
                         
-                        $name=mysqli_query($con,"select first,last from taker where id='$id'")or die(mysqli_error($con));
+                        $name=mysqli_query($con,"select * from taker left join monitoring on taker.id=monitoring.id where taker.id='$id' and monitor_status<>'Finished'")or die(mysqli_error($con));
                             $rm=mysqli_fetch_array($name);
+                             $age = date_create($rm['bday'])->diff(date_create('today'))->y;
+                             $pid=$rm['program_id'];
+                              $p=mysqli_query($con,"select * from program where program_id='$id'")or die(mysqli_error($con));
+                                     $rp=mysqli_fetch_array($p);
                 ?>    
                     <h1 class="page-header"><?php echo $rm['last'].", ".$rm['first'];?></h1>
                 </div>
@@ -49,6 +53,29 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
+
+                        <table width="100%" class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Birthday</th>
+                                        <th><?php echo date("M d, Y",strtotime($rm['bday']));?></th>
+                                        <td>Age</td>
+                                        <th><?php echo $age;?></th>
+                                        <td>Height</td>
+                                        <th><?php echo $rm['height'];?></th>
+                                        <td>Weight</td>
+                                        <th><?php echo $rm['orig_weight'];?></th>
+                                    </tr>
+                                    <tr>
+                                        <td>Program</td>
+                                        <th><?php echo $rp['program_name'];?></th>
+                                        <td>Target</td>
+                                        <th><?php echo $rm['target'];?></th>
+                                        <td>Points</td>
+                                        <th><?php echo $rm['points'];?></th>
+                                    </tr>
+                                </thead>
+                            </table>
                             <table width="100%" class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>

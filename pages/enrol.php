@@ -5,6 +5,7 @@ include('session.php');
 	$program = $_POST['program'];
 	$id = $_POST['id'];
 	$mid = $_POST['mid'];
+	$target = $_POST['target'];
 	$date=date("Y-m-d");
 	
 		mysqli_query($con,"UPDATE monitoring SET monitor_status='Finished' where monitor_id='$mid'")
@@ -17,8 +18,8 @@ include('session.php');
 
         if ($count==0)
         {
-        	mysqli_query($con,"INSERT INTO monitoring(id,program_id,start_date) 
-				VALUES('$id','$program','$date')")or die(mysqli_error($con));  
+        	mysqli_query($con,"INSERT INTO monitoring(id,program_id,start_date,target) 
+				VALUES('$id','$program','$date','$target')")or die(mysqli_error($con));  
 			$mid=mysqli_insert_id($con);	
 
 		    $result = mysqli_query($con,"SELECT * FROM supplement")or die(mysqli_error($con));  

@@ -45,6 +45,8 @@
                         
                         $name=mysqli_query($con,"select * from taker where id='$id'")or die(mysqli_error($con));
                             $rm=mysqli_fetch_array($name);
+
+                            $age = date_create($rm['bday'])->diff(date_create('today'))->y;
                 ?>    
                     <h1 class="page-header"></h1>
                 </div>
@@ -54,31 +56,43 @@
             <div class="row">
                 <table style="width: 100%;text-align: left;"  class="noborder">
                     <tr>
-                        <td>Last Name: </td>
-                        <th><?php echo strtoupper($rm['last']); ?></th>
-                        <td>First Name: </td>
-                        <th><?php echo strtoupper($rm['first']);?></th>
-                        <td>Gender: </td>
-                        <th><?php echo strtoupper($rm['gender']);?></th>
-                        <td>Birthday: </td>
-                        <th><?php echo strtoupper(date("M d, Y",strtotime($rm['bday'])));?></th>
+                        <td>Name: </td>
+                        <th><?php echo strtoupper($rm['last']); ?>
+                        , <?php echo strtoupper($rm['first']);?></th>
+                    </tr>
+                    <tr>
+                        <td>Address: </td>
+                        <th><?php echo strtoupper($rm['address']); ?></th>
+                        <td>Age </td>
+                        <th><?php echo strtoupper($age); ?></th>
+                        <td>Height:</td>
+                        <th><?php echo $rm['height'];?>m</th>
+                    </tr>
+                    <tr>
+                        
+                        
                     </tr>
                     <tr>
                         <td>Phone #: </td>
                         <th><?php echo $rm['phone'];?></th>
-                        <td>Height: <b><?php echo $rm['height'];?></b></td>
-                        <td>Weight: <b><?php echo $rm['orig_weight'];?></b></td>
-                        <td>Invited By: </td>
-                        <th>
-                        <?php
-                        $rid=$rm['referrer_id'];
-                        $referrer=mysqli_query($con,"select * from taker where id='$rid'")or die(mysqli_error($con));
-                            $r=mysqli_fetch_array($referrer);
-                            echo strtoupper($r['last'].", ".$r['first']);?></th>
+                        <td>Email: </td>
+                        <th><?php echo strtoupper($rm['email']);?></th>
+                        <td>Gender: </td>
+                        <th><?php echo strtoupper($rm['gender']);?></th>
+                    </tr>
+                    <tr>
+                        <td>Birthday: </td>
+                        <th><?php echo strtoupper(date("M d, Y",strtotime($rm['bday'])));?></th>
+<?php
+  $p=mysqli_query($con,"select * from monitoring natural join program where monitor_status<>'Finished' and id='$id'")or die(mysqli_error($con));
+                            $p1=mysqli_fetch_array($p);
+?>                        
+                        <td>Program: </td>
+                        <th><?php echo strtoupper($p1['program_name']);?></th>
+                        <td>Target: </td>
+                        <th><?php echo strtoupper($p1['target']);?></th>
+                    </tr>
 
-                        <td>Contact #: </td>
-                        <th><?php echo strtoupper($rm['referrer_contact']);?></th>
-                    </tr>    
                 </table>
                               <br>
     

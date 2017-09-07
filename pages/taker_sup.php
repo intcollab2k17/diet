@@ -74,6 +74,7 @@
                             </form>
                             <!--row-->
                             <div class="row">
+                                <form method="post" action="taker_meal_update.php">
                                 <div class="panel panel-success">
                                     <div class="panel-heading">
                                         Daily Meal
@@ -81,23 +82,48 @@
                             
                                 
 <?php
+         $querya=mysqli_query($con,"select * from monitoring where monitor_id='$mid'")or die(mysqli_error($con));
+             $rowa=mysqli_fetch_array($querya);
+             $id=$rowa['id'];
 
-        $query=mysqli_query($con,"select * from taker_meal natural join meal where id='$id'")or die(mysqli_error($con));
+        $query=mysqli_query($con,"select * from meal")or die(mysqli_error($con));
             $i=1;
           while ($row=mysqli_fetch_array($query)){
-           // $id=$row['question_id'];
+           $meal_id=$row['meal_id'];
+            $query1=mysqli_query($con,"select * from taker_meal where meal_id='$meal_id' and id='$id'")or die(mysqli_error($con));
+                $row1=mysqli_fetch_array($query1);
+
+                if ($row['meal_id']==$row1['meal_id'])
+                {
+                    $status="checked";
+                }
+                else
+                {
+                    $status="";
+                }
 ?>                               
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                             <label></label>
                                             <div class="checkbox">
                                                 <label>
+                                                    <input type="hidden" class="form-control" name="id" value="<?php echo $id;?>">
+                                                    <input type="checkbox" value="<?php echo $row['meal_id'];?>" name="meal[]" <?php echo $status;?>>
+
                                                     <?php echo $row['meal_time']." - ".$row['meal'];?>
                                                 </label>
+
                                             </div>
                                         </div>
                                 </div>
-<?php }?>                                
+<?php }?>                        
+                                <div class="row pull-right">
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="btn btn-lg btn-info">Save changes</button>
+                                        <button type="reset" class="btn btn-lg btn-default">Clear</button>
+                                    </div>
+                                </div>   
+                            </form>     
                             </div><!--row-->
                             
                             

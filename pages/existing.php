@@ -164,6 +164,12 @@
                                                                 
                                                     <?php } ?>
                                                     </div> 
+                                                    
+                                                        <div class="form-group col-md-6">
+                                                           <label>Target</label>
+                                                            <input class="form-control" name="target" placeholder="Target">
+                                                        </div>
+                                                    
                                             
                                         </div>
                                         <div class="modal-footer">
