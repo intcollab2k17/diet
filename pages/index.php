@@ -270,7 +270,7 @@
 <?php
         $m=date('m');
         $y=date('Y');
-        $query=mysqli_query($con,"select *,SUM(stockout_qty) as qty from stockout natural join product where YEAR(stockout_date)='$y' and MONTH(stockout_date)='$m' order by qty asc LIMIT 0,10")or die(mysqli_error($con));
+        $query=mysqli_query($con,"select *,SUM(stockout_qty) as qty from stockout natural join product where YEAR(stockout_date)='$y' and MONTH(stockout_date)='$m' group by prod_id order by stockout_qty asc LIMIT 0,10")or die(mysqli_error($con));
           while($row=mysqli_fetch_array($query))
                 {
 ?>                                                         

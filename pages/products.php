@@ -98,12 +98,107 @@
                                             <h4 class="modal-title" id="myModalLabel">Edit Wellness Program</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="post" action="program_edit.php">
+                                            <form method="post" action="product_edit.php">
                                                 <input type="hidden" name="id" value="<?php echo $row['prod_id'];?>">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Program Name</label>
-                                                        <input class="form-control" type="text" name="program" value="<?php echo $row['program_name'];?>" required>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Product Name</label>
+                                                            <input class="form-control" type="text" name="product" value="<?php echo $row['prod_name'];?>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Vol Pts</label>
+                                                            <input class="form-control" type="text" name="pts" value="<?php echo $row['vol_pts'];?>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Retail Price</label>
+                                                            <input class="form-control" type="text" name="price" value="<?php echo $row['retail'];?>" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Category</label>
+                                                            <select class="form-control" name="cat">
+                                                        <option value="<?php echo $row['cat_id'];?>"><?php echo $row['cat_name'];?></option>
+<?php
+
+    $result = mysqli_query($con,"SELECT * FROM category ORDER BY cat_name"); 
+        while ($row1 = mysqli_fetch_assoc($result)){
+?>
+                                     <option value="<?php echo $row1['cat_id'];?>"><?php echo $row1['cat_name'];?></option>
+<?php } ?> 
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Quantity</label>
+                                                            <input class="form-control" type="number" name="qty" value="<?php echo $row['qty'];?>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Reorder</label>
+                                                            <input class="form-control" type="number" name="reorder" value="<?php echo $row['reorder'];?>" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label> C </label>
+                                                            <input class="form-control" type="text" name="c" value="<?php echo $row['c'];?>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label> Profit </label>
+                                                            <input class="form-control" type="text" name="pc" value="<?php echo $row['profitc'];?>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label> SC </label>
+                                                            <input class="form-control" type="text" name="sc" value="<?php echo $row['sc'];?>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label> Profit </label>
+                                                            <input class="form-control" type="text" name="psc" value="<?php echo $row['profitsc'];?>" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label> SB </label>
+                                                            <input class="form-control" type="text" name="sb" value="<?php echo $row['sb'];?>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label> Profit </label>
+                                                            <input class="form-control" type="text" name="psb" value="<?php echo $row['profitsb'];?>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label> supv </label>
+                                                            <input class="form-control" type="text" name="supv" value="<?php echo $row['supv'];?>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label> Profit </label>
+                                                            <input class="form-control" type="text" name="psupv" value="<?php echo $row['profitsupv'];?>" required>
+                                                        </div>
                                                     </div>
                                                 </div>
                                         </div>
