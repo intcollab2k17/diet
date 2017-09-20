@@ -29,6 +29,10 @@
        border: 1px solid;
 
     }
+    @media print
+     {
+        #print {display: none;}
+     }
    </style>
 
 </head>
@@ -41,6 +45,9 @@
 
         <div id="page-wrapper">
             <div class="row">
+                 <div class="col-md-12" style="text-align: right">
+                    <button onclick="window.print()" class="btn btn-success" id="print">Print</button>
+                  </div>
                 <div class="col-lg-12">
                 <?php
                 $id=$_REQUEST['id'];
@@ -49,6 +56,8 @@
                         
                         $name=mysqli_query($con,"select * from taker where id='$id'")or die(mysqli_error($con));
                             $rm=mysqli_fetch_array($name);
+                            $gender=$rm['gender'];
+                            $age = date_create($rm['bday'])->diff(date_create('today'))->y;
                 ?>    
                     <h1 class="page-header"></h1>
                 </div>
@@ -106,9 +115,12 @@
              $query=mysqli_query($con,"select * from initial_result where ir_id='$iid'")or die(mysqli_error($con));
                 $day=1;
                 $row=mysqli_fetch_array($query);
-                   
+                $fat=$row['ir_fat'];
 
-?>                                
+             
+
+?>                    
+
                                     
                                 </thead>
                                 <tbody>
@@ -145,13 +157,20 @@
                 $row=mysqli_fetch_array($query);
                    
                     $bmi=$row['bmi'];
+
+                    $query2=mysqli_query($con,"select * from bfi where age_start<='$age' and age_end>='$age' and gender='$gender' and fat_start<='$fat' and fat_end>='$fat'")or die(mysqli_error($con));
+                
+                $row2=mysqli_fetch_array($query2);
+
+                $bfi_status=$row2['bfi_status'];
+                 
 ?>                                
                                     
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td><?php echo number_format($bmi,1);?> kg/m2</td>
-                                        <td><?php echo $row['bfi'];?></td>
+                                        <td><?php echo $bfi_status;?></td>
                                         <td><?php echo $row['remarks'];?></td>
                                        
                                     </tr>                                    

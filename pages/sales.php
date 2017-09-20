@@ -13,7 +13,13 @@
     <title>Diet Monitoring System</title>
 
     <?php include('css.php');?>
-
+    <style tyle="text/css">
+     @media print
+     {
+        #print {display: none;}
+     }
+     
+  </style>
    
 
 </head>
@@ -32,6 +38,9 @@
                    <h3 class="page-header" style="text-align: center;">Sales Report for the Month of <?php echo date('M');?></h3>
                 </div>
                 <!-- /.col-lg-12 -->
+                <div class="col-md-12" style="text-align: right">
+                    <button onclick="window.print()" class="btn btn-success" id="print">Print</button>
+                  </div>
             </div>
             <!-- /.row -->
             <div class="row">

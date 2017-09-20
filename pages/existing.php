@@ -1,4 +1,6 @@
-<?php include('session.php');?>
+<?php include('session.php');
+error_reporting(0);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,6 +78,7 @@
                                     $iid=$row3['ir_id'];
                                     $height=$row3['ir_height'];
                                     $weight=$row3['ir_weight'];
+                                    $fat=$row3['ir_fat'];
 ?>                                   
                                     <tr class="odd gradeX">
                                         <td class="center"><?php echo $row['points'];?></td>
@@ -284,10 +287,17 @@
                                                         <input class="form-control" name="" placeholder="Remarks" value="<?php echo $row3['remarks'];?>" readonly>
                                                     </div>
                                                 </div>
+<?php 
+   $query2=mysqli_query($con,"select * from bfi where age_start<='$age' and age_end>='$age' and gender='$gender' and fat_start<='$fat' and fat_end>='$fat'")or die(mysqli_error($con));
+                
+                $row2=mysqli_fetch_array($query2);
+
+                $bfi_status=$row2['bfi_status'];
+?>                                                
                                                 <div class="col-lg-4">
                                                     <div class="form-group">
                                                        <label>BFI</label>
-                                                        <input class="form-control" name="" placeholder="BFI" value="<?php echo $row3['bfi'];?>" readonly>
+                                                        <input class="form-control" name="" placeholder="BFI" value="<?php echo $bfi_status;?>" readonly>
                                                     </div>
                                                 </div>
                                             </div>

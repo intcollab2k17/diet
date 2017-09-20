@@ -247,6 +247,7 @@
                             </div>
                             <!-- /.list-group -->
                         </div>
+                        </div>
                         <!-- /.panel-body -->
                         <div class="panel panel-default">
                         <div class="panel-heading">

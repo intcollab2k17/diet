@@ -13,7 +13,13 @@
     <title>Diet Monitoring System</title>
 
     <?php include('css.php');?>
-
+    <style tyle="text/css">
+     @media print
+     {
+        #print {display: none;}
+     }
+     
+  </style>
    
 
 </head>
@@ -31,6 +37,9 @@
                     <h4 style="text-align: center;">RDA Happy Fit Club <br>Circumferential Road, Carlos Hilado Highway, Brgy. Bata <br>09267486448/09212812057</h4>
                    <h3 class="page-header" style="text-align: center;">Product Inventory as of <?php echo date("M d, Y");?></h3>
                 </div>
+                 <div class="col-md-12" style="text-align: right">
+                    <button onclick="window.print()" class="btn btn-success" id="print">Print</button>
+                  </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
