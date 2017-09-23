@@ -32,7 +32,7 @@
                 $mid=$_REQUEST['mid'];
                 $_SESSION['mid'] = $mid; 
                         
-                        $name=mysqli_query($con,"select * from taker left join monitoring on taker.id=monitoring.id where taker.id='$id' and monitor_status<>'Finished'")or die(mysqli_error($con));
+                        $name=mysqli_query($con,"select * from taker left join monitoring on taker.id=monitoring.id     where taker.id='$id' and monitor_status<>'Finished'")or die(mysqli_error($con));
                             $rm=mysqli_fetch_array($name);
                              $age = date_create($rm['bday'])->diff(date_create('today'))->y;
                              $pid=$rm['program_id'];
@@ -90,9 +90,9 @@
         $query=mysqli_query($con,"select * from question order by question")or die(mysqli_error($con));
             $i=1;
           while ($row=mysqli_fetch_array($query)){
-            $id=$row['question_id'];
+            $qid=$row['question_id'];
 
-                $query1=mysqli_query($con,"select * from survey where question_id='$id'")or die(mysqli_error($con));
+                $query1=mysqli_query($con,"select * from survey where question_id='$qid' and id='$id'")or die(mysqli_error($con));
             
                     $row1=mysqli_fetch_array($query1);
                     $answer=$row1['answer'];

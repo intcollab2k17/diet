@@ -1,6 +1,6 @@
 <?php session_start();
 if(empty($_SESSION['id'])):
-header('Location:../index.html');
+header('Location:../index.php');
 endif;
 ?>
 <!DOCTYPE html>
@@ -11,7 +11,7 @@ endif;
 
 	session_destroy();
 	
- echo '<meta http-equiv="refresh" content="2;url=../index.html">';
+ echo '<meta http-equiv="refresh" content="2;url=../index.php">';
  echo'<progress max=100><strong>Progress: 60% done. </strong></progress><br>';
 ?>
 </div>

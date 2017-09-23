@@ -19,6 +19,16 @@ include('session.php');
 	        $query=mysqli_query($con,"select * from result where monitor_id='$mid'")or die(mysqli_error($con));
 	          	$count=mysqli_num_rows($query);
 
+	          	$query1=mysqli_query($con,"select * from result where monitor_id='$mid' and weighin_date='$date'")or die(mysqli_error($con));
+	          	
+	          	$count1=mysqli_num_rows($query1);
+	          	if ($count1>0)
+	          	{
+	          		echo "<script type='text/javascript'>alert('Evaluation already added for this day!');</script>";
+					echo "<script>document.location='monitoring.php?mid=$mid&id=$id'</script>";
+	          	}
+	          	else
+	          	{        		
 	          	if ($count<10)
 	          	{
 	        		mysqli_query($con,"INSERT INTO result(monitor_id,weighin_date,weight,fat,visceral,bone_mass,rmr,metabolic_age,muscle_mass,physique_rating,water,remarks) 
@@ -34,5 +44,5 @@ include('session.php');
 					echo "<script type='text/javascript'>alert('Taker already reached the 10 days program!');</script>";
 					echo "<script>document.location='monitoring.php?mid=$mid&id=$id'</script>";   
 				}
-		
+		}
 ?>

@@ -39,16 +39,19 @@
                                 
                                 <tbody>
                     <?php
-
-        $query=mysqli_query($con,"select * from survey natural join question")or die(mysqli_error($con));
+                    $id=$_REQUEST['id'];
+        $query=mysqli_query($con,"select * from question")or die(mysqli_error($con));
             $i=1;
           while ($row=mysqli_fetch_array($query)){
+                $qid=$row['question_id'];
+                $query1=mysqli_query($con,"select * from survey where id='$id' and question_id='$qid'")or die(mysqli_error($con));
+                    $row1=mysqli_fetch_array($query1);
           
 ?>                                   
                                     <tr class="odd gradeX">
                                         <td class="center"><?php echo $i;?></td>
                                         <td><?php echo $row['question'];?></td>
-                                       <td><?php echo $row['answer'];?></td>
+                                       <td><?php echo $row1 ['answer'];?></td>
                                     </tr>
                                                           
 <?php $i++;}?>                                    

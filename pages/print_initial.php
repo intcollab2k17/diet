@@ -177,7 +177,9 @@
                                    
                                 </tbody>
                             </table>
-                           
+                           <br><br><br><br><br><br>
+                            <h3 style="text-align: center;">______________________________</h3>
+                            <h3 style="text-align: center;">Diet Coach</h3>
                     </div>
                     <!-- /.panel -->
                 </div>

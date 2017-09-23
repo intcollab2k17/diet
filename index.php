@@ -1,3 +1,11 @@
+<?php 
+session_start();
+if (isset($_SESSION['id']))
+   {
+    header("location:pages/index.php");
+    exit;
+   } 
+?>
 <!DOCTYPE html>
 <html lang="en">
 

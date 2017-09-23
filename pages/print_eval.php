@@ -25,6 +25,10 @@
         border: none
 
     }
+    @media print
+             {
+                #print {display: none;}
+             }
    </style>
 
 </head>
@@ -37,6 +41,9 @@
 
         <div id="page-wrapper">
             <div class="row">
+                <div class="col-md-12" style="text-align: right">
+                    <button onclick="window.print()" class="btn btn-success" id="print">Print</button>
+                  </div>
                 <div class="col-lg-12">
                 <?php
                 $id=$_REQUEST['id'];
@@ -127,7 +134,8 @@ $labels=array("DATES OF WEIGH-IN","WEIGHT","FAT%","VISCERAL FAT","BONE MASS","RM
             echo "</tr>";
             $i++;
         }
-?>                                
+?>                
+
                                     
                                 </thead>
                                 <tbody>
@@ -142,8 +150,9 @@ $labels=array("DATES OF WEIGH-IN","WEIGHT","FAT%","VISCERAL FAT","BONE MASS","RM
                                     
                                    
                                 </tbody>
-                            </table>
-                            <div id="graph"></div>
+                            </table><br><br>
+                            <h3 style="text-align: center;">______________________________</h3>
+                            <h3 style="text-align: center;">Diet Coach</h3>
                     </div>
                     <!-- /.panel -->
                 </div>
