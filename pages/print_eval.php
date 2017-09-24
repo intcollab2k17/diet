@@ -153,6 +153,20 @@ $labels=array("DATES OF WEIGH-IN","WEIGHT","FAT%","VISCERAL FAT","BONE MASS","RM
                             </table><br><br>
                             <h3 style="text-align: center;">______________________________</h3>
                             <h3 style="text-align: center;">Diet Coach</h3>
+                            <table style="width:30%;float: right">
+                            <?php 
+                        
+        $query=mysqli_query($con,"select * from taker_meal natural join meal where id='$id'")or die(mysqli_error($con));
+          while ($row=mysqli_fetch_array($query)){
+            $id=$row['id'];
+                            ?>
+                                <tr>
+                                    <td> 
+                                                    <?php echo $row['meal_time']. " - ".$row['meal'];?> 
+                                                   
+                                </tr>
+                            <?php }?>
+                            </table>
                     </div>
                     <!-- /.panel -->
                 </div>
