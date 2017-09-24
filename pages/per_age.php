@@ -69,51 +69,51 @@
                                        
                                         <th>
 <?php 
-$query=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=10 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=20 and program_id='$pid'")or die(mysqli_error($con));   
-    echo  mysqli_num_rows($query);
+$query1=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=10 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=20 and program_id='$pid'")or die(mysqli_error($con));   
+    echo  mysqli_num_rows($query1);
 ?>
                                         </th>
                                         <th>
 <?php 
-$query=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=21 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=30 and program_id='$pid'")or die(mysqli_error($con));   
-    echo  mysqli_num_rows($query);
+$query2=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=21 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=30 and program_id='$pid'")or die(mysqli_error($con));   
+    echo  mysqli_num_rows($query2);
 ?>                                            
                                         </th>
                                         <th>
 <?php 
-$query=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=31 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=40 and program_id='$pid'")or die(mysqli_error($con));   
-    echo  mysqli_num_rows($query);
+$query3=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=31 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=40 and program_id='$pid'")or die(mysqli_error($con));   
+    echo  mysqli_num_rows($query3);
 ?>                                            
                                         </th>
                                         <th>
 <?php 
-$query=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=41 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=50 and program_id='$pid'")or die(mysqli_error($con));   
-    echo  mysqli_num_rows($query);
+$query4=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=41 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=50 and program_id='$pid'")or die(mysqli_error($con));   
+    echo  mysqli_num_rows($query4);
 ?>                                            
                                         </th>
                                         <th>
 <?php 
-$query=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=51 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=60 and program_id='$pid'")or die(mysqli_error($con));   
-    echo  mysqli_num_rows($query);
+$query5=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=51 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=60 and program_id='$pid'")or die(mysqli_error($con));   
+    echo  mysqli_num_rows($query5);
 ?>                                            
                                         </th>
                                         <th>
 <?php 
-$query=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=61 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=70 and program_id='$pid'")or die(mysqli_error($con));   
-    echo  mysqli_num_rows($query);
+$query6=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=61 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=70 and program_id='$pid'")or die(mysqli_error($con));   
+    echo  mysqli_num_rows($query6);
 ?>                                            
                                         </th>
                                         <th>
 <?php 
-$query=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=71 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=80 and program_id='$pid'")or die(mysqli_error($con));   
-    echo  mysqli_num_rows($query);
+$query7=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=71 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=80 and program_id='$pid'")or die(mysqli_error($con));   
+    echo  mysqli_num_rows($query7);
 ?>                                            
                                         </th>
                                     </tr>
 <?php }?>                                
 <?php
 
-        $query=mysqli_query($con,"select * from monitoring natural join taker ")or die(mysqli_error($con));
+        $query8=mysqli_query($con,"select * from monitoring natural join taker ")or die(mysqli_error($con));
             $i=1;
         //  while ($row=mysqli_fetch_array($query)){
             $id=$row['prod_id'];
