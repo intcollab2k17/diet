@@ -69,8 +69,10 @@
                                        
                                         <th>
 <?php 
-$query1=mysqli_query($con,"select * from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=10 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<=20 and program_id='$pid'")or die(mysqli_error($con));   
-    echo  mysqli_num_rows($query1);
+$query10=mysqli_query($con,"select *,(DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) as age from monitoring natural join taker where (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365) >=10 and (DATEDIFF(CURRENT_DATE, STR_TO_DATE(bday, '%Y-%m-%d'))/365)<21 and program_id='$pid'")or die(mysqli_error($con));   
+    echo  mysqli_num_rows($query10);
+    $row10=mysqli_fetch_array($query10);
+    //echo $row10['age'];
 ?>
                                         </th>
                                         <th>
