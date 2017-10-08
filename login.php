@@ -1,6 +1,6 @@
 <?php session_start();
 
-include('pages/dbcon.php');
+include('coach/dbcon.php');
 
 if(isset($_POST['login']))
 {
@@ -18,6 +18,7 @@ $query=mysqli_query($con,"select * from admin where username='$user' and passwor
            
            $id=$row['admin_id'];
            $name=$row['name'];
+           $type=$row['type'];
 
   	if ($counter == 0) 
 	  {	
@@ -27,8 +28,17 @@ $query=mysqli_query($con,"select * from admin where username='$user' and passwor
 	  elseif ($counter > 0)
 	  {
 	  $_SESSION['id']=$id;	
-	 
-	    echo "<script type='text/javascript'>document.location='pages/index.php'</script>";
+	  $_SESSION['type']=$type;	
+	  $_SESSION['name']=$name;	
+	 	if ($type=='coach')
+	 	{
+	 		echo "<script type='text/javascript'>document.location='coach/index.php'</script>";
+	 	}
+	 	else
+	 	{
+	 		echo "<script type='text/javascript'>document.location='admin/index.php'</script>";
+	 	}
+	    
 	  }
 }	 
 ?>

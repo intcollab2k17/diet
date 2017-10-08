@@ -15,7 +15,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <?php echo $_SESSION['type'];?><i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="settings.php" style="color: #000!important"><i class="fa fa-gear fa-fw"></i> Settings</a>
@@ -44,10 +44,7 @@
                             <a href="#"><i class="fa fa-book fa-fw"></i> Profiling <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="new.php"> New Taker </a>
-                                </li>
-                                <li>
-                                    <a href="existing.php">Existing Takers</a>
+                                    <a href="existing.php">Active Takers</a>
                                 </li>
                                 <li>
                                     <a href="old.php">Inactive Takers</a>
@@ -75,6 +72,9 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="programs.php">Wellness Programs</a>
+                                </li>
+                                <li>
+                                    <a href="coach.php">Coaches</a>
                                 </li>
                                 <li>
                                     <a href="category.php">Category</a>

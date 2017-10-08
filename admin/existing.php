@@ -29,7 +29,7 @@ error_reporting(0);
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Existing Takers</h1>
+                    <h1 class="page-header">Active Takers</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -95,7 +95,7 @@ error_reporting(0);
                                         <td>
                                             <a href="taker_sup.php?mid=<?php echo $mid;?>" class="btn btn-warning"><i class="fa fa-glass"></i></a>
                                             <a href="monitoring.php?id=<?php echo $id;?>&mid=<?php echo $mid;?>" class="btn btn-info"><i class="glyphicon glyphicon-folder-open"></i></a>
-                                            <a class="btn btn-success" data-toggle="modal" data-target="#edit<?php echo $id;?>"><i class="glyphicon glyphicon-share-alt"></i></a>
+                                      
                                             <a class="btn btn-danger" data-toggle="modal" data-target="#delete<?php echo $id;?>"><i class="glyphicon glyphicon-pencil"></i></a>
                                         </td>
                                     </tr>
@@ -172,7 +172,7 @@ error_reporting(0);
                                                            <label>Target</label>
                                                             <input class="form-control" name="target" placeholder="Target">
                                                         </div>
-                                                    
+                                                        
                                             
                                         </div>
                                         <div class="modal-footer">
@@ -305,7 +305,7 @@ error_reporting(0);
                                             
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Update</button>
+                                           
                                             <a href="print_initial.php?iid=<?php echo $iid;?>&id=<?php echo $id;?>" class="btn btn-success">Print</a>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                         </div>

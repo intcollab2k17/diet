@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2017 at 08:46 AM
+-- Generation Time: Oct 07, 2017 at 08:26 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -30,16 +30,19 @@ CREATE TABLE `admin` (
   `admin_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `username` varchar(15) NOT NULL,
-  `password` varchar(15) NOT NULL
+  `password` varchar(15) NOT NULL,
+  `type` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`admin_id`, `name`, `username`, `password`) VALUES
-(1, 'Lavern Sim', 'lavern', '123'),
-(2, 'Gera', 'gera', '123');
+INSERT INTO `admin` (`admin_id`, `name`, `username`, `password`, `type`) VALUES
+(1, 'Lavern Sim', 'lavern', '123', 'admin'),
+(2, 'Gera', 'gera', '123', 'admin'),
+(4, 'Ananiel Manieja', 'anan', '123', 'coach'),
+(5, 'Jurlien Gargolez', 'jurlien', '123', 'coach');
 
 -- --------------------------------------------------------
 
@@ -86,7 +89,7 @@ INSERT INTO `category` (`cat_id`, `cat_name`) VALUES
 (1, 'Inner Nutrition Programmes'),
 (2, 'Weight Management Products - Packs'),
 (3, 'aaa'),
-(4, 'sasa');
+(4, '');
 
 -- --------------------------------------------------------
 
@@ -121,10 +124,8 @@ CREATE TABLE `initial_result` (
 --
 
 INSERT INTO `initial_result` (`ir_id`, `id`, `ir_date`, `ir_fat`, `ir_visceral`, `ir_bonemass`, `ir_restingmr`, `ir_metabolic_age`, `ir_muscle_mass`, `ir_physique_rating`, `ir_water`, `ir_ideal_weight`, `ir_excess_fat`, `ir_ideal_visceral`, `ir_height`, `ir_weight`, `bmi`, `bfi`, `remarks`) VALUES
-(1, 1, '2017-08-29', '23.00', '2.00', '3.00', '5.00', '6.00', '7.00', '8.00', '9.00', '0.00', '7.00', '7.00', '1.75', '70.00', '22.90', 'Good', 'noral'),
-(2, 1, '2017-08-29', '23.00', '2.00', '3.00', '5.00', '6.00', '7.00', '8.00', '9.00', '0.00', '7.00', '7.00', '1.75', '70.00', '22.86', 'Good', 'normal'),
-(3, 1, '2017-08-29', '23.00', '2.00', '3.00', '5.00', '6.00', '7.00', '8.00', '9.00', '0.00', '7.00', '7.00', '2.00', '55.00', '13.75', 'Good', 'underweight'),
-(4, 1, '2017-08-31', '23.00', '2.00', '3.00', '5.00', '6.00', '7.00', '8.00', '9.00', '0.00', '7.00', '7.00', '1.50', '50.00', '22.22', 'Good', 'normal');
+(1, 5, '2017-10-07', '19.00', '20.00', '30.00', '40.00', '50.00', '60.00', '70.00', '80.00', '90.00', '100.00', '111.00', '3.50', '50.00', '4.08', 'Excellent', 'underweight'),
+(2, 6, '2017-10-07', '20.00', '1.00', '2.00', '3.00', '4.00', '5.00', '6.00', '7.00', '8.00', '9.00', '10.00', '2.50', '50.00', '8.00', '', 'underweight');
 
 -- --------------------------------------------------------
 
@@ -160,17 +161,9 @@ CREATE TABLE `monitoring` (
   `program_id` int(11) NOT NULL,
   `target` varchar(50) NOT NULL,
   `monitor_status` varchar(15) NOT NULL,
-  `start_date` date NOT NULL
+  `start_date` date NOT NULL,
+  `coach_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `monitoring`
---
-
-INSERT INTO `monitoring` (`monitor_id`, `id`, `sponsor`, `program_id`, `target`, `monitor_status`, `start_date`) VALUES
-(1, 1, '', 1, '', 'Finished', '2017-08-29'),
-(2, 1, '', 3, '', 'Finished', '2017-08-29'),
-(3, 1, '', 2, '', '', '2017-08-29');
 
 -- --------------------------------------------------------
 
@@ -201,8 +194,9 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`prod_id`, `prod_name`, `vol_pts`, `c`, `sc`, `sb`, `supv`, `retail`, `profitc`, `profitsc`, `profitsb`, `profitsupv`, `qty`, `reorder`, `cat_id`) VALUES
-(1, 'Formula 1 Canister', 18, 10, 20, 30, 40, 1500, 10, 20, 30, 40, 8, 4, 1),
-(2, 'Formula 2', 18, 10, 20, 30, 40, 1500, 10, 20, 30, 40, 20, 1, 1);
+(1, 'Formula 1 Canister', 18, 10, 20, 30, 40, 1500, 10, 20, 30, 400, 8, 4, 1),
+(2, 'Formula 2', 18, 10, 20, 30, 40, 1500, 10, 20, 30, 40, 18, 1, 1),
+(3, 'dada', 1, 6, 8, 10, 12, 2, 7, 9, 11, 13, 3, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -267,13 +261,6 @@ CREATE TABLE `result` (
   `remarks` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `result`
---
-
-INSERT INTO `result` (`result_id`, `monitor_id`, `weighin_date`, `weight`, `fat`, `visceral`, `bone_mass`, `rmr`, `metabolic_age`, `muscle_mass`, `physique_rating`, `water`, `remarks`) VALUES
-(1, 1, '2017-08-29', '6.00', '7.00', '8.00', '9.00', '0.00', '6.00', '7.00', '6.00', '6.00', 'j');
-
 -- --------------------------------------------------------
 
 --
@@ -297,7 +284,7 @@ CREATE TABLE `schedule` (
 INSERT INTO `schedule` (`sched_id`, `sched_event`, `sched_time`, `sched_from`, `sched_to`, `sched_allday`, `sched_color`) VALUES
 (1, 'Free Wellness', '10:30:00', '2017-08-29', '2017-08-29', 'true', ''),
 (2, 'Test', '13:30:00', '2017-08-30', '2017-08-30', '', ''),
-(3, 'SeMinar', '10:00:00', '2017-08-31', '2017-08-31', '', '');
+(3, 'SeMinar', '00:00:00', '2017-08-31', '2017-08-31', '', '');
 
 -- --------------------------------------------------------
 
@@ -306,7 +293,7 @@ INSERT INTO `schedule` (`sched_id`, `sched_event`, `sched_time`, `sched_from`, `
 --
 
 CREATE TABLE `stockin` (
-  `stockout_id` int(11) NOT NULL,
+  `stockin_id` int(11) NOT NULL,
   `prod_id` int(11) NOT NULL,
   `stockin_qty` int(11) NOT NULL,
   `stockin_date` datetime NOT NULL
@@ -323,16 +310,17 @@ CREATE TABLE `stockout` (
   `prod_id` int(11) NOT NULL,
   `stockout_qty` int(11) NOT NULL,
   `stockout_date` datetime NOT NULL,
-  `id` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `admin_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `stockout`
 --
 
-INSERT INTO `stockout` (`stockout_id`, `prod_id`, `stockout_qty`, `stockout_date`, `id`) VALUES
-(1, 1, 1, '2017-08-25 14:11:25', 1),
-(2, 1, 1, '2017-08-29 16:17:41', 1);
+INSERT INTO `stockout` (`stockout_id`, `prod_id`, `stockout_qty`, `stockout_date`, `id`, `admin_id`) VALUES
+(1, 3, 1, '2017-10-07 14:12:21', 5, 4),
+(2, 3, 1, '2017-10-07 14:12:21', 5, 4);
 
 -- --------------------------------------------------------
 
@@ -351,8 +339,7 @@ CREATE TABLE `supplement` (
 --
 
 INSERT INTO `supplement` (`sup_id`, `prod_id`, `sup_count`) VALUES
-(1, 1, 10),
-(2, 2, 10);
+(3, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -372,12 +359,7 @@ CREATE TABLE `sup_taker` (
 --
 
 INSERT INTO `sup_taker` (`sup_taker`, `monitor_id`, `prod_id`, `count`) VALUES
-(1, 1, 1, 9),
-(2, 1, 2, 9),
-(3, 2, 1, 10),
-(4, 2, 2, 10),
-(5, 3, 1, 10),
-(6, 3, 2, 10);
+(1, 1, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -397,11 +379,21 @@ CREATE TABLE `survey` (
 --
 
 INSERT INTO `survey` (`survey_id`, `id`, `question_id`, `answer`) VALUES
-(1, 1, 2, 'yes'),
-(2, 2, 2, 'yes'),
-(3, 2, 4, 'yes'),
-(4, 3, 4, 'yes'),
-(5, 4, 1, 'yes');
+(1, 1, 1, 'yes'),
+(2, 1, 2, 'yes'),
+(3, 1, 3, 'yes'),
+(4, 1, 4, 'yes'),
+(5, 2, 1, 'yes'),
+(6, 3, 1, 'yes'),
+(7, 4, 1, 'yes'),
+(8, 4, 3, 'yes'),
+(9, 5, 1, 'yes'),
+(10, 5, 2, 'yes'),
+(11, 5, 3, 'yes'),
+(12, 5, 4, 'yes'),
+(13, 6, 1, 'yes'),
+(14, 6, 2, 'yes'),
+(15, 6, 3, 'yes');
 
 -- --------------------------------------------------------
 
@@ -424,18 +416,17 @@ CREATE TABLE `taker` (
   `points` decimal(7,2) NOT NULL,
   `discount` decimal(10,2) NOT NULL,
   `height` decimal(5,2) NOT NULL,
-  `orig_weight` decimal(5,2) NOT NULL
+  `orig_weight` decimal(5,2) NOT NULL,
+  `coach_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `taker`
 --
 
-INSERT INTO `taker` (`id`, `last`, `first`, `phone`, `gender`, `bday`, `referrer_id`, `referrer_contact`, `address`, `email`, `status`, `points`, `discount`, `height`, `orig_weight`) VALUES
-(1, 'Cueva', 'Kaye', '09898989', 'Female', '1994-10-24', 0, '8989', '', '', 'Active', '118.00', '1.00', '150.00', '60.00'),
-(2, 'njhj', 'jjj', '8787', 'Male', '2017-01-01', 1, '', '', '', 'Active', '50.00', '0.00', '1.75', '70.00'),
-(3, 'lkl', 'kjk', '6767', 'Male', '2017-01-01', 2, '878', '', '', 'Active', '0.00', '0.00', '2.00', '55.00'),
-(4, 'jjjj', 'kkk', '76767', 'Female', '1994-10-24', 1, '97878', '', '', 'Inactive', '0.00', '0.00', '1.50', '50.00');
+INSERT INTO `taker` (`id`, `last`, `first`, `phone`, `gender`, `bday`, `referrer_id`, `referrer_contact`, `address`, `email`, `status`, `points`, `discount`, `height`, `orig_weight`, `coach_id`) VALUES
+(5, 'Magbanua', 'Lee', '09051914070', 'Female', '1989-10-14', 0, '5454', '', '', 'Active', '1.00', '1.00', '3.50', '50.00', 1),
+(6, 'skjk', 'jkjk', '4254', 'Male', '2017-01-01', 0, '545', '', '', 'Active', '0.00', '0.00', '2.50', '50.00', 4);
 
 -- --------------------------------------------------------
 
@@ -454,7 +445,8 @@ CREATE TABLE `taker_meal` (
 --
 
 INSERT INTO `taker_meal` (`taker_meal_id`, `meal_id`, `id`) VALUES
-(4, 2, 1);
+(1, 1, 6),
+(2, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -543,7 +535,7 @@ ALTER TABLE `schedule`
 -- Indexes for table `stockin`
 --
 ALTER TABLE `stockin`
-  ADD PRIMARY KEY (`stockout_id`);
+  ADD PRIMARY KEY (`stockin_id`);
 
 --
 -- Indexes for table `stockout`
@@ -595,7 +587,7 @@ ALTER TABLE `temp_trans`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `bfi`
 --
@@ -610,7 +602,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `initial_result`
 --
 ALTER TABLE `initial_result`
-  MODIFY `ir_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ir_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `meal`
 --
@@ -620,12 +612,12 @@ ALTER TABLE `meal`
 -- AUTO_INCREMENT for table `monitoring`
 --
 ALTER TABLE `monitoring`
-  MODIFY `monitor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `monitor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `prod_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `prod_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `program`
 --
@@ -640,7 +632,7 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT for table `result`
 --
 ALTER TABLE `result`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `schedule`
 --
@@ -650,7 +642,7 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT for table `stockin`
 --
 ALTER TABLE `stockin`
-  MODIFY `stockout_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `stockin_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `stockout`
 --
@@ -660,32 +652,32 @@ ALTER TABLE `stockout`
 -- AUTO_INCREMENT for table `supplement`
 --
 ALTER TABLE `supplement`
-  MODIFY `sup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `sup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `sup_taker`
 --
 ALTER TABLE `sup_taker`
-  MODIFY `sup_taker` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `sup_taker` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `survey_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `taker`
 --
 ALTER TABLE `taker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `taker_meal`
 --
 ALTER TABLE `taker_meal`
-  MODIFY `taker_meal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `taker_meal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `temp_trans`
 --
 ALTER TABLE `temp_trans`
-  MODIFY `temp_trans_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `temp_trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
